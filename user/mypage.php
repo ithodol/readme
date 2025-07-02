@@ -46,6 +46,9 @@ $user = $result_user->fetch_assoc();
 <form action="update.php" method="get">
     <button type="submit">✏️ 수정하기</button>
 </form>
+<form action="delete_process.php" method="post">
+    <button type="submit">회원 탈퇴</button>
+</form>
 
 <hr>
 
