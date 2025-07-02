@@ -25,7 +25,7 @@ $user = $result->fetch_assoc();
 <body>
 
 <h2>👤 회원 정보 수정</h2>
-<form action="update_process.php" method="post">
+<form action="updatePro.php" method="post">
     <input type="hidden" name="uno" value="<?php echo $uno; ?>">
 
     <p>아이디: <strong><?php echo htmlspecialchars($user['uid']); ?></strong></p>
@@ -37,7 +37,7 @@ $user = $result->fetch_assoc();
     <p>새 비밀번호: <input type="password" name="upwd" placeholder="변경 시에만 입력"></p>
 
     <button type="submit">수정 완료</button>
-    <button type="button"><a href="mypage.php">취소</a></button>
+    <button type="button"><a href="info.php">취소</a></button>
     
 </form>
 

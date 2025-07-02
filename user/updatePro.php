@@ -26,7 +26,7 @@ if (!empty($upwd)) {
 if ($stmt->execute()) {
     // 세션 이름도 업데이트
     $_SESSION['uname'] = $uname;
-    echo "<script>alert('회원 정보가 수정되었습니다.'); location.href='mypage.php';</script>";
+    echo "<script>alert('회원 정보가 수정되었습니다.'); location.href='info.php';</script>";
 } else {
     echo "<script>alert('수정에 실패했습니다.'); history.back();</script>";
 }

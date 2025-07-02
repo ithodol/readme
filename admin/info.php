@@ -53,8 +53,8 @@ if (!isset($_SESSION['adno'])) {
     <form action="loan_manage.php" method="get">
         <button type="submit">📦 대출관리</button>
     </form>
-    <form action="user_manage.php" method="get">
-        <button type="submit">👤 회원관리</button>
+    <form action="userList.php" method="get">
+        <button onclick="location.href='userList.php'">회원관리</button>
     </form>
     <form action="book_manage.php" method="get">
         <button type="submit">📚 도서관리</button>

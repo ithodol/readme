@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['adno'] = $admin['adno'];
         $_SESSION['adname'] = $admin['adname'];
 
-        header("Location: ../home.php");
+        header("Location: ../admin/info.php");
         exit();
     } else {
         echo "아이디 또는 비밀번호가 잘못되었습니다.";

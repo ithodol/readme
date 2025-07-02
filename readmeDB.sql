@@ -10,6 +10,7 @@ create table user(
     uname varchar(20) NOT NULL, -- 이름
 	uphone varchar(13) NOT NULL, -- 연락처
     ustate boolean default 0, -- 대출가능 여부 0가능 1불가능
+    udelete boolean default 0, -- 탈퇴 여부 0회원 1탈퇴
 	constraint primary key (uno)
 );
 
@@ -75,7 +76,7 @@ INSERT INTO book (btitle, briter, bpub, bstate, bimg, sno) VALUES
 ('도롱뇽의 49재', '아사히나 아키', '시공사', 0, 'salamander.jpg', 1),
 ('부디 당신이 타락하기를', '무경', '나비클럽', 1, 'fall.jpg', 2),
 ('혼모노', '성해나', '창비', 0, 'Honmono.jpg', 3),
-('해리포터와 마법사의 돌', 'J.K. 롤링', '문학수첩', 1, 'hp1.jpg', 4),
+('스토너', '존 윌리엄스', '알에이치코리아', 1, 'stoner.jpg', 4),
 ('1984', '조지 오웰', '민음사', 0, '1984.jpg', 1),
 ('데미안', '헤르만 헤세', '민음사', 0, 'demian.jpg', 2);
 

@@ -46,7 +46,7 @@ $user = $result_user->fetch_assoc();
 <form action="update.php" method="get">
     <button type="submit">✏️ 수정하기</button>
 </form>
-<form action="delete_process.php" method="post">
+<form action="deletePro.php" method="post">
     <button type="submit">회원 탈퇴</button>
 </form>
 
@@ -82,7 +82,7 @@ if ($result->num_rows > 0) {
         echo "<td>" . htmlspecialchars($row['lddate']) . "</td>";
         echo "<td>" . ($row['lstate'] == 0 ? '대출중' : '반납완료') . "</td>";
         echo "<td>";
-        echo "<form method='post' action='return_book.php' style='margin:0;'>";
+        echo "<form method='post' action='returnBook.php' style='margin:0;'>";
         echo "<input type='hidden' name='lno' value='" . $row['lno'] . "'>";
         echo "<button type='submit'>반납하기</button>";
         echo "</form>";
