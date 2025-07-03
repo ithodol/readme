@@ -8,8 +8,8 @@ if (!isset($_SESSION['adno'])) {
     exit;
 }
 
-// 회원 목록 조회 (탈퇴하지 않은 회원만)
-$sql = "SELECT uno, uid, uname, uphone FROM user WHERE udelete = 0 ORDER BY uno ASC";
+// 회원 목록 조회 (모든 회원 포함)
+$sql = "SELECT uno, uid, uname, uphone, ustate, udelete FROM user ORDER BY uno ASC";
 $result = $conn->query($sql);
 ?>
 
@@ -31,6 +31,8 @@ $result = $conn->query($sql);
             <th>아이디</th>
             <th>이름</th>
             <th>전화번호</th>
+            <th>대출가능여부</th>
+            <th>탈퇴여부</th>
             <th>탈퇴 처리</th>
         </tr>
     </thead>
@@ -43,6 +45,8 @@ $result = $conn->query($sql);
                 echo "<td>" . htmlspecialchars($row['uid']) . "</td>";
                 echo "<td>" . htmlspecialchars($row['uname']) . "</td>";
                 echo "<td>" . htmlspecialchars($row['uphone']) . "</td>";
+                echo "<td>" . ($row['ustate'] ? 'X' : 'O') . "</td>";
+                echo "<td>" . ($row['udelete'] ? '탈퇴' : '회원') . "</td>";
                 echo "<td>";
                 echo "<form method='post' action='deleteUser.php' onsubmit=\"return confirm('정말 이 회원을 탈퇴시키겠습니까?');\">";
                 echo "<input type='hidden' name='uno' value='" . $row['uno'] . "'>";
@@ -52,7 +56,7 @@ $result = $conn->query($sql);
                 echo "</tr>";
             }
         } else {
-            echo "<tr><td colspan='5'>회원이 없습니다.</td></tr>";
+            echo "<tr><td colspan='7'>회원이 없습니다.</td></tr>";
         }
         ?>
     </tbody>

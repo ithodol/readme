@@ -9,10 +9,10 @@
 
 .bookDetailContainer {
     display: flex;
-    background-color: #fff;
+    background-color: #fdfdfd;
     border-radius: 12px;
     padding: 30px 130px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     gap: 100px;
     align-items: center;
     justify-content: center;
@@ -84,7 +84,7 @@
 }
 
 .backLink {
-    margin-top: 20px;
+    margin-bottom: 0px;
 }
 
 .backLink a {

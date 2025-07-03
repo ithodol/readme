@@ -50,11 +50,11 @@ if (!isset($_SESSION['adno'])) {
 <p><a href="../home.php">🏠 홈으로</a> | <a href="logout.php">로그아웃</a></p>
 
 <div class="btn-container">
-    <form action="loan_manage.php" method="get">
-        <button type="submit">📦 대출관리</button>
+    <form action="loanList.php" method="get">
+        <button type="submit">대출 관리</button>
     </form>
     <form action="userList.php" method="get">
-        <button onclick="location.href='userList.php'">회원관리</button>
+        <button onclick="location.href='userList.php'">회원 관리</button>
     </form>
     <form action="book_manage.php" method="get">
         <button type="submit">📚 도서관리</button>
