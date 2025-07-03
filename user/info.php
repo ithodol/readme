@@ -18,20 +18,9 @@ $result_user = $stmt_user->get_result();
 $user = $result_user->fetch_assoc();
 ?>
 
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>마이페이지</title>
-</head>
-<body>
+<?php include '../header.php'; ?>
 
 <h1>📖 마이페이지</h1>
-
-<p><strong><?php echo htmlspecialchars($_SESSION['uname']); ?></strong>님 환영합니다. 
-<a href="logout.php">로그아웃</a> | 
-<a href="../home.php">홈으로</a>
-</p>
 
 <hr>
 

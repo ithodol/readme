@@ -16,13 +16,7 @@ $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 ?>
 
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>회원 정보 수정</title>
-</head>
-<body>
+<?php include '../header.php'; ?>
 
 <h2>👤 회원 정보 수정</h2>
 <form action="updatePro.php" method="post">

@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>관리자 로그인</title>
-</head>
-<body>
+<?php include '../header.php'; ?>
 <h2>관리자 로그인</h2>
 <form method="post" action="loginPro.php">
     아이디: <input type="text" name="adid" required><br><br>
