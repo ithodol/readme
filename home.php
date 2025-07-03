@@ -3,29 +3,7 @@ session_start();
 include 'db.php';
 ?>
 
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>도서관리 홈</title>
-    <link rel="stylesheet" href="css/main.css" />
-</head>
-<body>
-
-<h1>📚 READ ME</h1>
-
-<?php
-// 로그인 상태 표시
-if (isset($_SESSION['adno'])) {
-    echo "<p><strong>" . htmlspecialchars($_SESSION['adname']) . "</strong>님 환영합니다. <a href='admin/logout.php'>로그아웃</a> | <a href='admin/info.php'>관리자 전용</a></p>";
-} else if (isset($_SESSION['uno'])) {
-    echo "<p><strong>" . htmlspecialchars($_SESSION['uname']) . "</strong>님 환영합니다. <a href='user/logout.php'>로그아웃</a> | <a href='user/info.php'>마이페이지</a></p>";
-} else {
-    echo "<p><a href='user/login.php'>회원 로그인</a> | <a href='admin/login.php'>관리자 로그인</a></p>";
-}
-?>
-
-<hr>
+<?php include 'header.php'; ?>
 
 <!-- 🔍 검색 기능 -->
 <h2>🔍 도서 검색</h2>
@@ -37,7 +15,7 @@ if (isset($_SESSION['adno'])) {
 <hr>
 
 <!-- 🆕 신착 도서 -->
-<h2 class="sectionTitle">🆕 신착 도서</h2>
+<!-- <h2 class="sectionTitle">🆕 신착 도서</h2>
 
 <div class="bookList">
 <?php
@@ -55,9 +33,7 @@ if ($recentBooks->num_rows > 0) {
     echo "<p>신착 도서가 없습니다.</p>";
 }
 ?>
-</div>
-
-<hr>
+</div> -->
 
 
 <!-- 📖 대출 가능 도서 -->
@@ -83,7 +59,7 @@ $result = $conn->query($data);
             <p>대출 가능 도서가 없습니다.</p>
         <?php endif; ?>
     </div>
-    <a href="user/bookList.php" class="moreButton">더 보기 →</a>
+    <a href="./book/bookList.php" class="moreButton">더 보기 →</a>
 </div>
 
 <!-- 공지사항 -->

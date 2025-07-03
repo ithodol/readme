@@ -1,0 +1,98 @@
+.pageWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* 세로 정렬 유지 시 */
+    min-height: calc(100vh - 60px); /* 헤더 높이만큼 빼줌 */
+    padding-top: 60px; /* 헤더 고정 공간 확보 */
+}
+
+.bookDetailContainer {
+    display: flex;
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 30px 130px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    gap: 100px;
+    align-items: center;
+    justify-content: center;
+}
+
+.bookImageContainer {
+    flex-shrink: 0;
+}
+
+.bookImage {
+    width: 220px;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+}
+
+.bookInfo {
+    flex-grow: 1;
+    padding: 10px 90px;
+    gap: 1;
+    text-align: center;
+}
+
+.bookTitle {
+    margin-top: 0;
+    font-size: 1.6em;
+    margin-bottom: 20px;
+}
+
+.bookInfoList {
+    list-style: none;
+    padding-left: 0;
+    margin: 0 0 20px 0;
+}
+
+.bookInfoList li {
+    margin: 10px 0;
+    text-align: start;
+}
+
+.label {
+    display: inline-block;
+    width: 130px;
+    font-weight: bold;
+}
+
+.loanForm {
+    margin-top: 10px;
+}
+
+.loanForm button {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.loanForm button:hover {
+    background-color: #45a049;
+}
+
+.unavailableText {
+    color: red;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.backLink {
+    margin-top: 20px;
+}
+
+.backLink a {
+    color: #333;
+    text-decoration: none;
+}
+
+.backLink a:hover {
+    text-decoration: underline;
+}
