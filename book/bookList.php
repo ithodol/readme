@@ -49,7 +49,6 @@ $resultBooks = $conn->query($sql);
 if ($resultBooks->num_rows > 0) {
     while ($bookItem = $resultBooks->fetch_assoc()) {
         echo '<div class="bookItem">';
-        // 도서 이미지 + 제목 클릭 시 상세 페이지로 이동
         echo '<a href="bookView.php?bno=' . $bookItem['bno'] . '">';
         echo '<img src="../img/' . htmlspecialchars($bookItem['bimg']) . '" alt="' . htmlspecialchars($bookItem['btitle']) . '">';
         echo '<h4>' . htmlspecialchars($bookItem['btitle']) . '</h4>';
@@ -59,14 +58,10 @@ if ($resultBooks->num_rows > 0) {
         echo '<p>' . htmlspecialchars($bookItem['bpub']) . '</p>';
 
         if ($bookItem['bstate'] == 0) {
-            echo '<form method="post" action="loanRequestProcess.php">';
-            echo '<input type="hidden" name="bno" value="' . $bookItem['bno'] . '">';
-            echo '<button type="submit">📖 대출 신청</button>';
-            echo '</form>';
+            echo '<hr><p class="available">대출 가능</p>';
         } else {
-            echo '<p class="unavailable">대출 불가</p>';
+            echo '<hr><p class="unavailable">대출 불가</p>';
         }
-
         echo '</div>';
     }
 } else {
@@ -74,6 +69,7 @@ if ($resultBooks->num_rows > 0) {
 }
 ?>
 </div>
+
 
 
 </body>

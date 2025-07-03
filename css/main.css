@@ -72,7 +72,10 @@ body {
 .unavailable {
     color: red;
     font-weight: bold;
-    padding-top: 13px;
+}
+.available{
+    color: blue;
+    font-weight: bold;
 }
 
 .moreButton {

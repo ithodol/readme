@@ -2,9 +2,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column; /* 세로 정렬 유지 시 */
-    min-height: calc(100vh - 60px); /* 헤더 높이만큼 빼줌 */
-    padding-top: 60px; /* 헤더 고정 공간 확보 */
+    flex-direction: column; 
+    min-height: calc(100vh - 60px);
+    padding-top: 60px; 
 }
 
 .bookDetailContainer {
@@ -16,6 +16,7 @@
     gap: 100px;
     align-items: center;
     justify-content: center;
+    margin-top: 30px;
 }
 
 .bookImageContainer {
@@ -24,7 +25,6 @@
 
 .bookImage {
     width: 220px;
-    border-radius: 8px;
     object-fit: cover;
     box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
 }
@@ -39,7 +39,7 @@
 .bookTitle {
     margin-top: 0;
     font-size: 1.6em;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .bookInfoList {
@@ -63,25 +63,24 @@
     margin-top: 10px;
 }
 
-.loanForm button {
-    padding: 8px 16px;
+.loanButton, .unavailableText {
+    margin: 10px 0px;
+    padding: 18px 40px;
     background-color: #4CAF50;
     border: none;
     border-radius: 6px;
     color: white;
     font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.3s;
 }
 
-.loanForm button:hover {
+.loanButton:hover {
     background-color: #45a049;
 }
 
 .unavailableText {
-    color: red;
-    font-weight: bold;
-    margin-top: 20px;
+    background-color: red;
+    cursor:auto;
 }
 
 .backLink {
