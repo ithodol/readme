@@ -1,0 +1,80 @@
+.userInfoCon {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+/* 페이지 제목 */
+.pageTitle {
+    margin: 60px 0px;
+    text-align: center;
+}
+.userInfoCon > h2{
+    text-align: center;
+}
+
+/* 테이블 */
+.userTable {
+  width: 80%;           /* 부모 너비 80% */
+  margin-left: auto;
+  margin-right: auto;   /* 자동 마진으로 가운데 정렬 */
+  border-collapse: collapse;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  font-size: 1rem;
+  display: table;       /* 혹시 다른 스타일로 바뀌었나 확인 */
+}
+
+.userTable th,
+.userTable td {
+  border: 1px solid #ddd;
+  padding: 12px 16px;
+  text-align: left;
+}
+
+.userTable th {
+  background-color: #2d89ef;
+  color: white;
+  font-weight: 600;
+}
+
+.formBox{
+    display: flex;
+    justify-content: center;
+}
+
+
+/* 버튼 */
+.infoUpdateBtn, .infoDeleteBtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 0px 10px;
+}
+.infoUpdateBtn:hover {
+  background-color: #45a049;
+}
+.infoDeleteBtn{
+    background-color: #E53935;
+}
+.infoDeleteBtn:hover{
+    background-color: #B71C1C ;
+}
+
+
+
+/* 링크 */
+.link {
+  color: #2d89ef;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.link:hover {
+  color: #1a5fc8;
+  text-decoration: underline;
+}

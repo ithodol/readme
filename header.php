@@ -11,6 +11,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <link rel="stylesheet" href="/readme/css/main.css">
     <link rel="stylesheet" href="/readme/css/header.css">
     <link rel="stylesheet" href="/readme/css/book.css">
+    <link rel="stylesheet" href="/readme/css/user.css">
 </head>
 <body>
     <header class="globalHeader">
@@ -24,7 +25,7 @@ if (session_status() === PHP_SESSION_NONE) {
                       <a href='/readme/admin/info.php'>관리자 전용</a>";
             } else if (isset($_SESSION['uno'])) {
                 echo "<strong>" . htmlspecialchars($_SESSION['uname']) . "</strong>님 환영합니다. 
-                      <a href='/readme/user/logout.php'>로그아웃</a> | 
+                      <a href='/readme/user/logout.php'>로그아웃 </a>
                       <a href='/readme/user/info.php'>마이페이지</a>";
             } else {
                 echo "<a href='/readme/user/login.php'>회원 로그인</a> | 
@@ -33,5 +34,4 @@ if (session_status() === PHP_SESSION_NONE) {
             ?>
             </div>
         </div>
-        <hr>
     </header>
