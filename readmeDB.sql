@@ -54,6 +54,15 @@ INSERT INTO slot (srow, scol) VALUES
 ('B', 1),
 ('B', 2);
 
+# 도서 카테고리
+CREATE TABLE category(
+	cno int unsigned auto_increment,
+    cname varchar(10),
+    constraint primary key (cno)
+);
+
+INSERT INTO category(cname) VALUES
+('소설'),('시/에세이'), ('인문'), ('경제'), ('자기계발');
 
 # 도서
 CREATE TABLE book (
@@ -64,21 +73,55 @@ CREATE TABLE book (
     bstate BOOLEAN DEFAULT 0,                 -- 대출 상태 (0: 가능, 1: 대출 중)
     bimg VARCHAR(100),                        -- 도서 이미지 파일명 or 경로
     sno INT unsigned NOT NULL,                         -- 위치 번호 (외래키)
+    cno INT unsigned,
     constraint primary key (bno),
-    constraint foreign key(sno) references slot(sno) on update cascade on delete cascade
+    constraint foreign key(sno) references slot(sno) on update cascade on delete cascade,
+    constraint foreign key(cno) references category(cno) on update cascade on delete cascade
 );
 
-INSERT INTO book (btitle, briter, bpub, bstate, bimg, sno) VALUES
-('파과', '구병모', '창비', 0, 'pagua.jpg', 1),
-('종의 기원', '정유정', '은행나무', 1, 'origin.jpg', 2),
-('완전한 행복', '정유정', '은행나무', 0, 'happiness.jpg', 3),
-('살육에 이르는 병', '아비코 다케마루', '시공사', 0, 'murder.jpg', 4),
-('도롱뇽의 49재', '아사히나 아키', '시공사', 0, 'salamander.jpg', 1),
-('부디 당신이 타락하기를', '무경', '나비클럽', 1, 'fall.jpg', 2),
-('혼모노', '성해나', '창비', 0, 'Honmono.jpg', 3),
-('스토너', '존 윌리엄스', '알에이치코리아', 1, 'stoner.jpg', 4),
-('1984', '조지 오웰', '민음사', 0, '1984.jpg', 1),
-('데미안', '헤르만 헤세', '민음사', 0, 'demian.jpg', 2);
+INSERT INTO book (btitle, briter, bpub, bstate, bimg, sno, cno) VALUES
+('파과', '구병모', '창비', 0, 'pagua.jpg', 1, 1),
+('종의 기원', '정유정', '은행나무', 1, 'origin.jpg', 2, 1),
+('완전한 행복', '정유정', '은행나무', 0, 'happiness.jpg', 3, 1),
+('살육에 이르는 병', '아비코 다케마루', '시공사', 0, 'murder.jpg', 4, 1),
+('도롱뇽의 49재', '아사히나 아키', '시공사', 0, 'salamander.jpg', 1, 1),
+('부디 당신이 타락하기를', '무경', '나비클럽', 1, 'fall.jpg', 2, 1),
+('혼모노', '성해나', '창비', 0, 'Honmono.jpg', 3, 1),
+('스토너', '존 윌리엄스', '알에이치코리아', 1, 'stoner.jpg', 4, 1),
+('1984', '조지 오웰', '민음사', 1, '1984.jpg', 1, 1),
+('데미안', '헤르만 헤세', '민음사', 0, 'demian.jpg', 2, 1),
+('첫 여름, 완주', '김금희', '무제', 0, 'summer.jpg', 1, 1),
+
+('우리의 낙원에서 만나자', '하태완', '북로망스', 0, 'paradise.jpg', 1, 2),
+('단 한 번의 삶', '김영하', '복복서가', 1, 'once.jpg', 2, 2),
+('어른의 행복은 조용하다', '태수', '페이지2북스', 0, 'quiet_happiness.jpg', 3, 2),
+('서랍에 저녁을 넣어 두었다', '한강', '문학과지성사', 1, 'drawer_evening.jpg', 4, 2),
+('죽음의 수용소에서', '빅터 프랭클', '청아출판사', 0, 'mans_search.jpg', 1, 2),
+('초록의 어두운 부분', '조용미', '문학과지성사', 0, 'green_dark.jpg', 2, 2),
+
+
+('초역 부처의 말', '코이케 류노스케', '포레스트북스', 0, 'buddha.jpg', 3, 3),
+('자유론', '존스튜어트 밀', '책세상', 0, 'liberty.jpg', 4, 3),
+('부의 심리학', '김경일', '포레스트북스', 0, 'wealth_psych.jpg', 1, 3),
+('도둑맞은 집중력', '요한 하리', '어크로스', 0, 'focus.jpg', 2, 3),
+('비폭력대화', '마셜 B. 로젠버그', '한국NVC출판사', 0, 'nvc.jpg', 3, 3),
+
+
+('돈의 심리학', '모건 하우절', '인플루엔셜', 0, 'money_psych.jpg', 4, 4),
+('빅 사이클', '레이 달리오', '한빛비즈', 1, 'big_cycle.jpg', 1, 4),
+('돈의 속성', '김승호', '스노우폭스북스', 0, 'money_nature.jpg', 2, 4),
+('부자 아빠 가난한 아빠', '로버트 기요사키', '민음인', 0, 'rich_dad.jpg', 3, 4),
+
+
+('행동은 불안을 이긴다', '롭 다이얼', '서삼독', 0, 'action_beats_anxiety.jpg', 4, 5),
+('데일 카네기 인간관계론', '데일 카네기', '현대지성', 1, 'carnegie.jpg', 1, 5),
+('벤저민 프랭클린 자서전', '벤저민 프랭클린', '현대지성', 0, 'franklin.jpg', 2, 5),
+('생각의 연금술', '제임스 알렌 외', '포레스트북스', 0, 'alchemy.jpg', 3, 5),
+('하루 5분 아침 일기', '인텔리전트 체인지', '심야책방', 0, '5min_diary.jpg', 4, 5);
+
+
+
+
 
 
 # 대출
