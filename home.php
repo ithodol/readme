@@ -7,10 +7,10 @@ include 'db.php';
 
 <!-- 🔍 검색 기능 -->
 <div class="searchBox">
-    <h2>🔍 도서 검색</h2>
+    <h1>🔍 도서 검색</h1>
     <form method="get" action="search.php">
         <input type="text" name="keyword" placeholder="도서명 또는 저자 검색" required>
-        <button type="submit">검색하기</button>
+        <button type="submit">검색</button>
     </form>
 </div>
 
@@ -24,7 +24,7 @@ $result = $conn->query($data);
 ?>
 
 <div class="bookBox">
-    <h2>📖 대출 가능 도서</h2>
+    <h1>📖 대출 가능 도서</h1>
     <div class="bookList">
         <?php if ($result->num_rows > 0): ?>
             <?php while ($book = $result->fetch_assoc()): ?>
@@ -44,7 +44,7 @@ $result = $conn->query($data);
 <hr>
 
 <!-- 공지사항 -->
-<h2>📢 공지사항</h2>
+<h1>📢 공지사항</h1>
 <?php
 $notices = $conn->query("SELECT nno, ntitle, ndate FROM notice ORDER BY ndate DESC LIMIT 3");
 

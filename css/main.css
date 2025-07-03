@@ -20,11 +20,17 @@ html, body {
 body {
   padding-top: 60px;
 }
+.bookBox > h1{
+    margin:60px 0px;
+}
 .bookBox, .searchBox{
     text-align: center;
 }
+.searchBox > h1{
+    margin-top: 50px;
+}
 .searchBox > form {
-    margin: 20px 0px 30px 0px;
+    margin: 20px 0px 50px 0px;
 }
 
 .bookList {
