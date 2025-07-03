@@ -1,23 +1,43 @@
+@font-face {
+    font-family: 'NEXON Lv1 Gothic OTF';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+* {
+    font-family: 'NEXON Lv1 Gothic OTF';
+}
+a{
+    text-decoration: none;
+    color: black;
+}
 html, body {
     margin: 0;
     padding: 0;
     height: 100%;
-    font-family: '맑은 고딕', sans-serif;
     background-color: #f5f5f5;
 }
 body {
   padding-top: 60px;
 }
+.bookBox, .searchBox{
+    text-align: center;
+}
+.searchBox > form {
+    margin: 20px 0px 30px 0px;
+}
 
 .bookList {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 20px;
+    margin: 30px 0px;
 }
 
 .bookItem {
     border: 1px solid #ccc;
-    padding: 10px;
+    padding: 15px;
     width: 180px;
     text-align: center;
     border-radius: 6px;
@@ -29,7 +49,7 @@ body {
     width: 100%;
     height: 250px;
     object-fit: cover;
-    border-radius: 4px;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.3);
 }
 
 .bookItem button {
@@ -46,27 +66,22 @@ body {
 .unavailable {
     color: red;
     font-weight: bold;
-}
-
-.sectionTitle {
-    margin-top: 30px;
-    margin-bottom: 10px;
-    font-weight: bold;
-    font-size: 1.2em;
+    padding-top: 13px;
 }
 
 .moreButton {
     margin-top: 10px;
     display: inline-block;
-    padding: 5px 12px;
-    background: #007BFF;
+    padding: 10px 15px;
+    background: black;
     color: white;
     text-decoration: none;
     border-radius: 4px;
+    margin-bottom: 20px;
 }
 
 .moreButton:hover {
-    background: #0056b3;
+    background: gray;
 }
 
 

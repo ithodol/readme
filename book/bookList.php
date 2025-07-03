@@ -15,8 +15,7 @@ $resultBooks = $conn->query($sql);
 
 <?php include '../header.php'; ?>
 
-<h2>📚 도서 리스트 - 대출 신청</h2>
-<p><a href="../home.php">홈</a> </p>
+<h2>📚 도서 전체 목록</h2>
 
 <div class="bookList">
 <?php
@@ -29,8 +28,8 @@ if ($resultBooks->num_rows > 0) {
         echo '<h4>' . htmlspecialchars($bookItem['btitle']) . '</h4>';
         echo '</a>';
 
-        echo '<p>저자: ' . htmlspecialchars($bookItem['briter']) . '</p>';
-        echo '<p>출판사: ' . htmlspecialchars($bookItem['bpub']) . '</p>';
+        echo '<p>' . htmlspecialchars($bookItem['briter']) . '</p>';
+        echo '<p>' . htmlspecialchars($bookItem['bpub']) . '</p>';
 
         if ($bookItem['bstate'] == 0) {
             echo '<form method="post" action="loanRequestProcess.php">';
