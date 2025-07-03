@@ -148,3 +148,62 @@ INSERT INTO loan (ldate, lddate, lrdate, lstate, uno, bno) VALUES
 
 
 
+# 입고 출고 재고
+CREATE TABLE inven (
+    ino INT UNSIGNED AUTO_INCREMENT,
+    itype BOOLEAN NOT NULL, -- 0입고 1출고
+    icount INT NOT NULL,
+    istock INT NOT NULL,
+    idate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    imemo VARCHAR(255),
+    bno INT UNSIGNED,
+    adno INT UNSIGNED,
+    constraint primary key (ino),
+	constraint foreign key(bno) references book(bno) on update cascade on delete cascade,
+    constraint foreign key(adno) references admin(adno) on update cascade on delete cascade
+);
+
+
+-- 📘 도서 1: 초도 입고 + 출고
+INSERT INTO inven (itype, icount, istock, imemo, bno, adno) VALUES
+(0, 10, 10, '초기 입고', 1, 1),
+(1, 2, 8, '도서관 손상으로 출고', 1, 1);
+
+-- 📙 도서 4: 입고만 여러 번
+INSERT INTO inven (itype, icount, istock, imemo, bno, adno) VALUES
+(0, 7, 7, '1차 입고', 4, 1),
+(0, 5, 12, '2차 입고', 4, 2);
+
+-- 📕 도서 8: 입고 → 출고
+INSERT INTO inven (itype, icount, istock, imemo, bno, adno) VALUES
+(0, 15, 15, '재고 확보', 8, 2),
+(1, 5, 10, '폐기 처리', 8, 2);
+
+-- 📗 도서 11: 입고 → 출고 → 입고
+INSERT INTO inven (itype, icount, istock, imemo, bno, adno) VALUES
+(0, 12, 12, '신간 입고', 11, 1),
+(1, 3, 9, '도난으로 출고', 11, 1),
+(0, 6, 15, '보충 입고', 11, 1);
+
+-- 📘 도서 15: 입고 1건
+INSERT INTO inven (itype, icount, istock, imemo, bno, adno) VALUES
+(0, 20, 20, '기본 입고', 15, 3);
+
+-- 📕 도서 20: 입고 → 다량 출고
+INSERT INTO inven (itype, icount, istock, imemo, bno, adno) VALUES
+(0, 30, 30, '다량 입고', 20, 2),
+(1, 10, 20, '이관 출고', 20, 2);
+
+-- 📙 도서 27: 입고만 1건
+INSERT INTO inven (itype, icount, istock, imemo, bno, adno) VALUES
+(0, 5, 5, '입고 테스트', 27, 1);
+
+-- 📗 도서 31: 입고 → 출고 → 출고
+INSERT INTO inven (itype, icount, istock, imemo, bno, adno) VALUES
+(0, 8, 8, '초도 입고', 31, 3),
+(1, 2, 6, '불량', 31, 3),
+(1, 1, 5, '이동출고', 31, 3);
+
+
+
+
