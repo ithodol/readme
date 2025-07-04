@@ -1,0 +1,121 @@
+.adminPageWrapper {
+  text-align: center;
+  padding-top: 50px;
+  font-family: sans-serif;
+}
+
+.adminPageTitle {
+  margin-bottom: 30px;
+}
+
+.adminButtonContainer {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.adminButtonContainer form {
+  display: inline-block;
+}
+
+.adminBtn {
+  padding: 15px 30px;
+  font-size: 16px;
+  border: none;
+  background-color: #007BFF;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.adminBtn:hover {
+  background-color: #0056b3;
+}
+
+
+
+
+/* 도서관리 inven */
+.invenTitle {
+  margin-bottom: 30px;
+  font-size: 24px;
+}
+
+.invenTableWrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.invenTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.invenTable th,
+.invenTable td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.invenTable thead {
+  background-color: #f2f2f2;
+}
+
+.inType {
+  color: #388e3c;
+  font-weight: bold;
+}
+
+.outType {
+  color: #d32f2f;
+  font-weight: bold;
+}
+
+a {
+  color: #007BFF;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+
+
+.invenButtonWrapper {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.invenButton {
+  padding: 15px 30px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: white;
+}
+
+.inButton {
+  background-color: #4CAF50;
+}
+
+.inButton:hover {
+  background-color: #45a049;
+}
+
+.outButton {
+  background-color: #E53935; 
+}
+
+.outButton:hover {
+  background-color: #B71C1C;
+}
