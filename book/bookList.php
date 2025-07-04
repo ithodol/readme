@@ -8,31 +8,33 @@ if (!isset($_SESSION['uno'])) {
 }
 
 // ① URL 파라미터로 cno 받아오기 (없으면 전체)
-$cno = isset($_GET['cno']) ? intval($_GET['cno']) : null;
+$cno = isset($_GET['cno']) ? intval($_GET['cno']) : 0;
 
-// ② 기본 SQL (전체 도서)
-$sql = "SELECT b.bno, btitle, briter, bpub, bimg, bstate 
-        FROM book b";
+// ② 기본 SQL
+$sql = "SELECT b.bno, btitle, briter, bpub, bimg, bstate, 
+               SUM(i.istock) AS istock
+        FROM book b
+        JOIN inven i ON b.bno = i.bno";
 
-// ③ 카테고리 필터가 있으면 조건 추가
-if ($cno) {
+// ③ 카테고리 조건 추가
+if ($cno > 0) {
     $sql .= " WHERE b.cno = $cno";
 }
 
-$sql .= " ORDER BY bno ASC";
+// ④ 그룹핑 및 정렬
+$sql .= " GROUP BY b.bno, btitle, briter, bpub, bimg, bstate
+          ORDER BY bno ASC";
+
 $resultBooks = $conn->query($sql);
 ?>
 
-
-
 <?php include '../header.php'; ?>
-
 
 <h1 style="text-align: center; margin:60px 0px;">📚 도서 전체 목록</h1>
 
 <!-- 카테고리 버튼 -->
 <div class="categoryButtons">
-    <a href="bookList.php" <?= !$cno ? 'class="active"' : '' ?>>전체</a>
+    <a href="bookList.php" <?= $cno == 0 ? 'class="active"' : '' ?>>전체</a>
     <?php
     $resultCats = $conn->query("SELECT cno, cname FROM category ORDER BY cno ASC");
     while ($cat = $resultCats->fetch_assoc()) {
@@ -41,8 +43,6 @@ $resultBooks = $conn->query($sql);
     }
     ?>
 </div>
-
-
 
 <div class="bookList">
 <?php
@@ -57,20 +57,23 @@ if ($resultBooks->num_rows > 0) {
         echo '<p>' . htmlspecialchars($bookItem['briter']) . '</p>';
         echo '<p>' . htmlspecialchars($bookItem['bpub']) . '</p>';
 
-        if ($bookItem['bstate'] == 0) {
+        $currentStock = isset($bookItem['istock']) ? (int)$bookItem['istock'] : 0;
+
+        if ($bookItem['bstate'] == 0 && $currentStock > 0) {
             echo '<hr><p class="available">대출 가능</p>';
+        } elseif ($currentStock == 0) {
+            echo '<hr><p class="unavailable">현재 재고가 없어 대출이 불가합니다.</p>';
         } else {
-            echo '<hr><p class="unavailable">대출 불가</p>';
+            echo '<hr><p class="unavailable">현재 대출 중입니다.</p>';
         }
+
         echo '</div>';
     }
 } else {
-    echo '<p>등록된 도서가 없습니다.</p>';
+    echo '<p style="text-align:center; margin-top:40px;">등록된 도서가 없습니다.</p>';
 }
 ?>
 </div>
-
-
 
 </body>
 </html>
