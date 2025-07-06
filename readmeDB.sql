@@ -4,13 +4,13 @@ use readme;
 
 # 사용자
 create table user( 
-	uno int unsigned auto_increment, -- 식별번호
-    uid varchar(20) NOT NULL UNIQUE, -- 아이디
-    upwd varchar(30) NOT NULL, -- 비밀번호
-    uname varchar(20) NOT NULL, -- 이름
-	uphone varchar(13) NOT NULL, -- 연락처
-    ustate boolean default 0, -- 대출가능 여부 0가능 1불가능
-    udelete boolean default 0, -- 탈퇴 여부 0회원 1탈퇴
+	uno int unsigned auto_increment, 
+    uid varchar(20) NOT NULL UNIQUE, 
+    upwd varchar(30) NOT NULL, 
+    uname varchar(20) NOT NULL, 
+	uphone varchar(13) NOT NULL, 
+    ustate boolean default 0, 
+    udelete boolean default 0,
 	constraint primary key (uno)
 );
 
@@ -44,7 +44,7 @@ INSERT INTO admin (adid, adpwd, adname, adphone) VALUES
 
 # 위치
 CREATE TABLE slot (
-    sno INT unsigned AUTO_INCREMENT,  -- 위치 번호
+    sno INT unsigned AUTO_INCREMENT,  
     srow VARCHAR(2) NOT NULL,    
     scol INT NOT NULL,             
     constraint primary key (sno)
@@ -68,12 +68,12 @@ INSERT INTO category(cname) VALUES
 
 # 도서
 CREATE TABLE book (
-    bno INT unsigned AUTO_INCREMENT,       -- 도서 번호
-    btitle VARCHAR(100) NOT NULL,             -- 제목
-    briter VARCHAR(50) NOT NULL,              -- 저자
-    bpub VARCHAR(50) NOT NULL,                -- 출판사
-    bimg VARCHAR(100),                        -- 도서 이미지 파일명 or 경로
-    sno INT unsigned NOT NULL,                         -- 위치 번호 (외래키)
+    bno INT unsigned AUTO_INCREMENT,     
+    btitle VARCHAR(100) NOT NULL,           
+    briter VARCHAR(50) NOT NULL,             
+    bpub VARCHAR(50) NOT NULL,               
+    bimg VARCHAR(100),                        
+    sno INT unsigned NOT NULL,                         
     cno INT unsigned,
     constraint primary key (bno),
     constraint foreign key(sno) references slot(sno) on update cascade on delete cascade,
@@ -124,13 +124,13 @@ INSERT INTO book (btitle, briter, bpub, bimg, sno, cno) VALUES
 
 # 대출
 CREATE TABLE loan (
-    lno INT unsigned AUTO_INCREMENT,    -- 대출 번호
-    ldate DATE NOT NULL,                    -- 대출 일자
-    lddate DATE NOT NULL,                   -- 반납 예정일
-    lrdate DATE,                           -- 반납일 (NULL 가능)
-    lstate BOOLEAN NOT NULL DEFAULT 0,     -- 반납 상태 (0: 대출중, 1: 반납됨)
-    uno INT unsigned NOT NULL,                      -- 사용자 번호 (외래키)
-    bno INT unsigned NOT NULL,                      -- 도서 번호 (외래키)
+    lno INT unsigned AUTO_INCREMENT,    
+    ldate DATE NOT NULL,                    
+    lddate DATE NOT NULL,                   
+    lrdate DATE,                           
+    lstate BOOLEAN NOT NULL DEFAULT 0,     
+    uno INT unsigned NOT NULL,                     
+    bno INT unsigned NOT NULL,                      
 
 	constraint primary key (lno),
     constraint foreign key(uno) references user(uno) on update cascade on delete cascade,
@@ -161,43 +161,27 @@ CREATE TABLE inven (
     constraint foreign key(adno) references admin(adno) on update cascade on delete cascade
 );
 
-
--- 📘 도서 1: 초도 입고 + 출고
 INSERT INTO inven (itype, icount, istock, imemo, bno, adno) VALUES
 (0, 10, 10, '초기 입고', 1, 1),
-(1, 2, 8, '도서관 손상으로 출고', 1, 1);
+(1, 2, 8, '도서관 손상으로 출고', 1, 1),
 
--- 📙 도서 4: 입고만 여러 번
-INSERT INTO inven (itype, icount, istock, imemo, bno, adno) VALUES
 (0, 7, 7, '1차 입고', 4, 1),
-(0, 5, 12, '2차 입고', 4, 2);
+(0, 5, 12, '2차 입고', 4, 2),
 
--- 📕 도서 8: 입고 → 출고
-INSERT INTO inven (itype, icount, istock, imemo, bno, adno) VALUES
 (0, 15, 15, '재고 확보', 8, 2),
-(1, 5, 10, '폐기 처리', 8, 2);
+(1, 5, 10, '폐기 처리', 8, 2),
 
--- 📗 도서 11: 입고 → 출고 → 입고
-INSERT INTO inven (itype, icount, istock, imemo, bno, adno) VALUES
 (0, 12, 12, '신간 입고', 11, 1),
 (1, 3, 9, '도난으로 출고', 11, 1),
-(0, 6, 15, '보충 입고', 11, 1);
+(0, 6, 15, '보충 입고', 11, 1),
 
--- 📘 도서 15: 입고 1건
-INSERT INTO inven (itype, icount, istock, imemo, bno, adno) VALUES
-(0, 20, 20, '기본 입고', 15, 3);
+(0, 20, 20, '기본 입고', 15, 3),
 
--- 📕 도서 20: 입고 → 다량 출고
-INSERT INTO inven (itype, icount, istock, imemo, bno, adno) VALUES
 (0, 30, 30, '다량 입고', 20, 2),
-(1, 10, 20, '이관 출고', 20, 2);
+(1, 10, 20, '이관 출고', 20, 2),
 
--- 📙 도서 27: 입고만 1건
-INSERT INTO inven (itype, icount, istock, imemo, bno, adno) VALUES
-(0, 5, 5, '입고 테스트', 27, 1);
+(0, 5, 5, '입고 테스트', 27, 1),
 
--- 📗 도서 31: 입고 → 출고 → 출고
-INSERT INTO inven (itype, icount, istock, imemo, bno, adno) VALUES
 (0, 8, 8, '초도 입고', 31, 3),
 (1, 2, 6, '불량', 31, 3),
 (1, 1, 5, '이동출고', 31, 3);
@@ -207,12 +191,3 @@ select * from book ;
 select * from inven where bno = 2;
 select * from inven where istock < 0;
 select * from loan;
-
-SELECT b.*, 
-       COALESCE(SUM(i.istock), 0) AS totalStock
-FROM book b
-LEFT JOIN inven i ON b.bno = i.bno
-GROUP BY b.bno
--- 조건절 예시
--- WHERE b.btitle LIKE '%검색어%'
-ORDER BY b.bno ASC;
