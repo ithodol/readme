@@ -10,7 +10,7 @@ if (!isset($_SESSION['adno'])) {
 
 $adNo = $_SESSION['adno'];
 
-// itype 받아서 입고(0) 출고(1) 구분
+// itype 받아서 입고(0) 출고(1) 구분 (GET은 화면 표시용)
 $itype = isset($_GET['itype']) && ($_GET['itype'] == '1') ? 1 : 0;
 $title = $itype === 0 ? "입고 등록" : "출고 등록";
 $btnText = $itype === 0 ? "입고하기" : "출고하기";
@@ -21,17 +21,23 @@ $resultBooks = $conn->query($sqlBooks);
 
 // 입출고 처리
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $postItype = isset($_POST['itype']) ? intval($_POST['itype']) : 0;
+    // POST의 itype 값을 반드시 사용
+    $postItype = isset($_POST['itype']) ? intval($_POST['itype']) : null;
     $bno = isset($_POST['bno']) ? intval($_POST['bno']) : 0;
     $icount = isset($_POST['icount']) ? intval($_POST['icount']) : 0;
     $imemo = isset($_POST['imemo']) ? trim($_POST['imemo']) : '';
 
+    // 유효성 검사
+    if ($postItype === null || ($postItype !== 0 && $postItype !== 1)) {
+        echo "<script>alert('입출고 유형이 올바르지 않습니다.'); history.back();</script>";
+        exit;
+    }
     if ($bno <= 0 || $icount <= 0) {
         echo "<script>alert('도서 선택과 수량은 필수입니다.'); history.back();</script>";
         exit;
     }
 
-    // 현재 재고 조회
+    // 현재 재고 조회 (가장 최신 재고)
     $sqlStock = "SELECT istock FROM inven WHERE bno = ? ORDER BY idate DESC LIMIT 1";
     $stmtStock = $conn->prepare($sqlStock);
     $stmtStock->bind_param("i", $bno);
@@ -58,25 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmtInsert->bind_param("iiisii", $postItype, $icount, $newStock, $imemo, $bno, $adNo);
 
     if ($stmtInsert->execute()) {
-
-        // 재고 총합 계산 (inven 테이블에서 해당 bno 재고 모두 합산)
-        $sqlSum = "SELECT SUM(istock) AS totalStock FROM inven WHERE bno = ?";
-        $stmtSum = $conn->prepare($sqlSum);
-        $stmtSum->bind_param("i", $bno);
-        $stmtSum->execute();
-        $resSum = $stmtSum->get_result();
-        $totalStock = 0;
-        if ($resSum->num_rows > 0) {
-            $rowSum = $resSum->fetch_assoc();
-            $totalStock = intval($rowSum['totalStock']);
-        }
-
-        // book 테이블의 bstate 업데이트
-        // 재고가 0 이하이면 1(대출불가), 그 외는 0(대출가능)
-        $newBstate = ($totalStock <= 0) ? 1 : 0;
-        $stmtUpdate = $conn->prepare("UPDATE book SET bstate = ? WHERE bno = ?");
-        $stmtUpdate->bind_param("ii", $newBstate, $bno);
-        $stmtUpdate->execute();
+        // bstate 업데이트 코드 삭제 (필요 없으므로)
 
         echo "<script>alert('{$btnText}가 완료되었습니다.'); location.href='invenList.php';</script>";
         exit;
@@ -92,6 +80,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="stockFormBox">
     <h2 class="stockTitle"><?= $title ?></h2>
     <form method="post" action="inven.php?itype=<?= $itype ?>" class="stockForm">
+        <input type="hidden" name="itype" value="<?= $itype ?>">
+
         <div class="formGroup">
             <label for="bno">도서</label>
             <select name="bno" id="bno" required>
@@ -119,6 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </button>
         </div>
     </form>
+
 </div>
 
 </body>

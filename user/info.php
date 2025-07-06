@@ -85,7 +85,7 @@ $user = $result_user->fetch_assoc();
                     <td>
                         <form method="post" action="/readme/book/returnBookPro.php" onsubmit="return confirm('반납하시겠습니까?');">
                         <input type="hidden" name="lno" value="<?= $row['lno'] ?>">
-                        <button type="submit">반납하기</button>
+                        <button type="submit" class="rBook">반납하기</button>
                         </form>
                     </td>
                 </tr>

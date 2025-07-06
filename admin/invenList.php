@@ -18,7 +18,7 @@ $sql = "
            a.adname
     FROM inven i
     JOIN book b ON i.bno = b.bno
-    JOIN admin a ON i.adno = a.adno
+    LEFT JOIN admin a ON i.adno = a.adno
 ";
 
 // 조건 추가 (하루 선택된 경우)
