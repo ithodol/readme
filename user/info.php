@@ -42,7 +42,7 @@ $user = $result_user->fetch_assoc();
 
     <hr>
 
-    <!-- 대출 현황 -->
+    <h2 class="sectionTitle">📚 대출 중인 도서</h2>    
     <?php
     $sql = "
         SELECT loan.lno, book.bno, book.btitle, book.briter, loan.ldate, loan.lddate, loan.lstate
@@ -58,7 +58,7 @@ $user = $result_user->fetch_assoc();
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0): ?>
-        <h2 class="sectionTitle">📚 대출 중인 도서</h2>
+
         <table border="1" cellpadding="5" cellspacing="0">
             <thead>
                 <tr>
@@ -83,9 +83,9 @@ $user = $result_user->fetch_assoc();
                     <td><?= htmlspecialchars($row['lddate']) ?></td>
                     <td><?= $row['lstate'] == 0 ? '대출중' : '반납완료' ?></td>
                     <td>
-                        <form method="post" action="returnBook.php">
-                            <input type="hidden" name="lno" value="<?= $row['lno'] ?>">
-                            <button type="submit">반납하기</button>
+                        <form method="post" action="/readme/book/returnBookPro.php" onsubmit="return confirm('반납하시겠습니까?');">
+                        <input type="hidden" name="lno" value="<?= $row['lno'] ?>">
+                        <button type="submit">반납하기</button>
                         </form>
                     </td>
                 </tr>
@@ -97,8 +97,8 @@ $user = $result_user->fetch_assoc();
     <?php endif; ?>
 
     <hr>
-
-    <!-- 대출 내역 -->
+    
+    <h2>📚 반납 완료 도서</h2>
     <?php
     $sqlHistory = "
         SELECT loan.lno, book.bno, book.btitle, book.briter, loan.ldate, loan.lddate, loan.lrdate
@@ -114,7 +114,7 @@ $user = $result_user->fetch_assoc();
     $resultHistory = $stmtHistory->get_result();
 
     if ($resultHistory->num_rows > 0): ?>
-        <h2>📚 대출 내역</h2>
+        
         <table border="1" cellpadding="5" cellspacing="0">
             <thead>
                 <tr>

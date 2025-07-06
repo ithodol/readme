@@ -37,10 +37,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmtUpdateLoan->bind_param("si", $today, $lno);
     $stmtUpdateLoan->execute();
 
-    // 상태수정
-    $stmtUpdateBook = $conn->prepare("UPDATE book SET bstate = 0 WHERE bno = ?");
-    $stmtUpdateBook->bind_param("i", $bno);
-    $stmtUpdateBook->execute();
 
     echo "<script>alert('반납이 완료되었습니다.'); location.href='/readme/user/info.php';</script>";
     exit;
