@@ -29,7 +29,7 @@ PHP와 MySQL을 활용한 웹 기반 도서 관리 시스템입니다.
 - **Version** : PHP 8.4
 - **IDE** : <img src="https://img.shields.io/badge/vscode-1e97e8?style=for-the-badge&logo=vscode&logoColor=white"/>
 - **DataBase** : <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">
-- **Web Server** : <img src="https://img.shields.io/badge/xampp-#FB7A24?style=for-the-badge&logo=xampp&logoColor=white">
+- **Web Server** : <img src="https://img.shields.io/badge/xampp-FB7A24?style=for-the-badge&logo=xampp&logoColor=white">
 
 <br><br><br>
 
@@ -39,7 +39,7 @@ PHP와 MySQL을 활용한 웹 기반 도서 관리 시스템입니다.
 - **비회원** (진행 중)
   - 도서 검색 
   - 공지사항 조회
-  - 
+    
  <br>
  
 - **회원**
