@@ -36,9 +36,9 @@
 }
 
 .bookTitle {
-    margin-top: 0;
-    font-size: 1.6em;
-    margin-bottom: 30px;
+    font-size: 18px;
+    margin: 20px 0px;
+    font-weight: bold;
 }
 
 .bookInfoList {
