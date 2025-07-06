@@ -92,10 +92,6 @@
     text-decoration: none;
 }
 
-.backLink a:hover {
-    text-decoration: underline;
-}
-
 .categoryButtons {
     text-align: center;
     margin: 25px;

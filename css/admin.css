@@ -81,12 +81,6 @@ a {
   font-weight: bold;
 }
 
-a:hover {
-  text-decoration: underline;
-}
-
-
-
 .invenButtonWrapper {
   display: flex;
   justify-content: flex-end;

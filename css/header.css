@@ -38,9 +38,6 @@
     text-decoration: none;
 }
 
-.loginStatus a:hover {
-    text-decoration: underline;
-}
 
 /* 본문 내용이 헤더 아래에서 시작하도록 여백 추가 */
 .pageWrapper {
