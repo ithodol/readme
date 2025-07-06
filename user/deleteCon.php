@@ -9,7 +9,7 @@ if (!isset($_SESSION['uno'])) {
 
 $uno = $_SESSION['uno'];
 
-$sql = "UPDATE user SET udelete = 1 WHERE uno = ?";
+$sql = "UPDATE user SET udelete = 1, ustate = 1 WHERE uno = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $uno);
 

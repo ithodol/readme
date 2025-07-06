@@ -6,15 +6,14 @@ include 'db.php';
 <?php include 'header.php'; ?>
 
 <!-- 🔍 검색 기능 -->
-<div class="searchBox">
+<!-- <div class="searchBox">
     <h1>🔍 도서 검색</h1>
     <form method="get" action="search.php">
         <input type="text" name="keyword" placeholder="도서명 또는 저자 검색" required>
         <button type="submit">검색</button>
     </form>
-</div>
+</div> -->
 
-<hr>
 
 <!-- 📖 대출 가능 도서 -->
 <?php
@@ -82,10 +81,8 @@ if ($resultAll->num_rows > 0) {
     <a href="./book/bookList.php" class="moreButton">더 보기</a>
 </div>
 
-<hr>
-
 <!-- 공지사항 -->
-<h1 class="noticeTitle">📢 공지사항</h1>
+<!-- <h1 class="noticeTitle">📢 공지사항</h1>
 <?php
 $notices = $conn->query("SELECT nno, ntitle, ndate FROM notice ORDER BY ndate DESC LIMIT 3");
 
@@ -98,8 +95,7 @@ if ($notices && $notices->num_rows > 0) {
 } else {
     echo "<p class=\"noNotices\">등록된 공지사항이 없습니다.</p>";
 }
-?>
+?> -->
 
-<link rel="stylesheet" href="styles/home.css">
 </body>
 </html>
