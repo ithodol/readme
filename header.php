@@ -22,7 +22,7 @@ if (session_status() === PHP_SESSION_NONE) {
             <?php
             if (isset($_SESSION['adno'])) {
                 echo "<strong>" . htmlspecialchars($_SESSION['adname']) . "</strong>님 환영합니다. 
-                      <a href='/readme/admin/logout.php'>로그아웃</a> | 
+                      <a href='/readme/admin/logout.php'>로그아웃</a>  
                       <a href='/readme/admin/info.php'>관리자 전용</a>";
             } else if (isset($_SESSION['uno'])) {
                 echo "<strong>" . htmlspecialchars($_SESSION['uname']) . "</strong>님 환영합니다. 

@@ -1,114 +1,431 @@
-.adminPageWrapper {
+
+.adminPageCon {
+  max-width: 800px;
+  margin: 100px auto;
   text-align: center;
-  padding-top: 50px;
-  font-family: sans-serif;
 }
 
-.adminPageTitle {
-  margin-bottom: 30px;
+
+.adminTitle {
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin-bottom: 50px;
 }
 
 .adminButtonContainer {
   display: flex;
   justify-content: center;
-  gap: 30px;
-  margin-bottom: 40px;
+  flex-wrap: wrap;
+  gap: 40px;
 }
 
-.adminButtonContainer form {
-  display: inline-block;
-}
 
 .adminBtn {
-  padding: 15px 30px;
-  font-size: 16px;
+  padding: 20px 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
   border: none;
-  background-color: #007BFF;
-  color: white;
   border-radius: 8px;
+  background-color: black;
+  color: white;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  min-width: 180px;
 }
 
 .adminBtn:hover {
-  background-color: #0056b3;
+  background-color: gray;
+}
+
+.adminBtn::before {
+  margin-right: 6px;
+}
+
+
+
+/* 대출 관리 */
+.loanListBox {
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 30px;
+  background-color: #fdfdfd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.06);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* 제목 */
+.loanListTitle {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 40px;
+}
+
+/* 테이블 스타일 */
+.loanTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.loanTable th,
+.loanTable td {
+  border: 1px solid #ccc;
+  padding: 12px 10px;
+  text-align: center;
+}
+
+.loanTable th {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+}
+
+
+/* 링크 스타일 */
+.loanBookLink {
+  font-weight: 500;
+  text-decoration: none;
+}
+
+/* 상태 텍스트 */
+.loanState {
+  font-weight: bold;
+}
+
+.loanPending {
+  font-weight: bold;
+  color: #4CAF50;
+}
+
+/* 내역 없을 때 */
+.loanEmptyMsg {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #555;
+  margin-top: 40px;
+}
+
+
+
+/* 회원관리 */
+/* 전체 컨테이너 */
+.userListBox {
+  max-width: 1000px;
+  margin: 60px auto;
+  padding: 30px;
+  border-radius: 12px;
+}
+
+/* 제목 */
+.userListTitle {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 40px;
+}
+
+
+/* 테이블 스타일 */
+.userTableAdmin {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.userTableAdmin th,
+.userTableAdmin td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+.userTableAdmin th {
+  background-color: black;
+  color: white;
+}
+
+/* 상태 스타일 */
+.userStateActive {
+  font-weight: bold;
+}
+.userStateInactive {
+  color: red;
+  font-weight: bold;
+}
+.userDeleted {
+  color: gray;
+  font-style: italic;
+}
+
+/* 탈퇴 버튼 */
+.userDeleteBtn {
+  padding: 6px 14px;
+  background-color: #e53935;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.userDeleteBtn:hover {
+  background-color: #b71c1c;
 }
 
 
 
 
-/* 도서관리 inven */
+
+
+
+/* 📚 도서 입출고 내역 페이지 */
+
+/* 도서 입출고 페이지 전체 박스 */
+.invenBox {
+  max-width: 1100px;
+  margin: 60px auto;
+  padding: 30px;
+  border-radius: 10px;
+}
+
 .invenTitle {
-  margin-bottom: 30px;
-  font-size: 24px;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: black;
+  margin-bottom: 40px;
 }
 
+/* 버튼 묶음 */
+.invenButtonWrapper {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin: 20px auto 10px;
+  max-width: 1100px;
+}
+
+/* 입고/출고 버튼 공통 */
+.invenButton {
+  padding: 10px 20px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  color: white;
+}
+
+/* 입고 버튼 */
+.inButton {
+  background-color: #4CAF50;
+}
+.inButton:hover {
+  background-color: #45a049;
+}
+
+/* 출고 버튼 */
+.outButton {
+  background-color: #E53935;
+}
+.outButton:hover {
+  background-color: #B71C1C;
+}
+
+/* 날짜 필터 폼 */
+.dateFilterForm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px auto 30px;
+  font-size: 0.95rem;
+}
+
+.dateFilterForm input[type="date"] {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.dateFilterForm button {
+  padding: 6px 14px;
+  border: none;
+  background-color: black;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.dateFilterForm button:hover {
+  background-color: gray;
+}
+
+/* 테이블 영역 */
 .invenTableWrapper {
   max-width: 1100px;
-  margin: 0 auto;
+  margin: 0 auto 60px;
 }
 
 .invenTable {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 2rem;
   background-color: #fff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
 }
 
 .invenTable th,
 .invenTable td {
   border: 1px solid #ddd;
-  padding: 10px;
+  padding: 12px 10px;
   font-size: 14px;
+  text-align: center;
 }
 
-.invenTable thead {
-  background-color: #f2f2f2;
+.invenTable th {
+  background-color: black;
+  color: white;
+  font-weight: bold;
 }
 
+.invenTable tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+/* 입고/출고 컬러 강조 */
 .inType {
-  color: #388e3c;
+  color: #2e7d32;
   font-weight: bold;
 }
 
 .outType {
-  color: #d32f2f;
+  color: #c62828;
   font-weight: bold;
 }
 
-a {
-  text-decoration: none;
-  font-weight: bold;
+/* 관리자 이름 강조 */
+.invenTable td:last-child {
+  font-style: italic;
+  color: #333;
 }
 
-.invenButtonWrapper {
+
+
+
+
+/* 입고/출고 */
+.stockFormBox {
+  width: 20%;
+  margin: 60px auto;
+  padding: 30px 40px;
+  background-color: #fdfdfd;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.06);
+}
+
+.stockTitle {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 40px;
+}
+
+/* 📄 폼 스타일 */
+.stockForm {
   display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin: 20px 0;
+  flex-direction: column;
+  gap: 40px; 
 }
 
-.invenButton {
-  padding: 15px 30px;
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup label {
+  font-weight: bold;
+  margin-bottom: 6px; /* label과 입력 필드 간 간격 */
+}
+
+.stockForm label {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.stockForm input[type="text"],
+.stockForm input[type="number"],
+.stockForm select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
   font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.stockForm input[type="text"]::placeholder {
+  color: #aaa;
+}
+
+/* 버튼 */
+.stockButton {
+  width: 100%;
+  padding: 12px;
+  background-color: black;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.stockButton:hover {
+  background-color: #ccc;
+}
+
+/* 취소 버튼 배경색만 변경 */
+.stockBack {
+  background-color: #ccc;
+}
+
+.stockBack:hover {
+  background-color: #999;
+}
+
+/* 버튼 안 a 태그 강제 스타일 */
+.stockBack a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+  text-align: center;
+  line-height: 1;
+}
+
+.stockBack:hover a {
   color: white;
 }
 
-.inButton {
-  background-color: #4CAF50;
+/* 버튼 그룹 */
+.stockBtnGroup {
+  display: flex;
+  flex-direction: column; /* 또는 row */
+  gap: 8px;
+  margin-top: 10px;
 }
 
-.inButton:hover {
-  background-color: #45a049;
+/* 링크 */
+.stockFormBox p {
+  text-align: center;
 }
 
-.outButton {
-  background-color: #E53935; 
+.stockFormBox p a {
+  font-size: 14px;
+  text-decoration: none;
+  margin-bottom: 20px;
 }
 
-.outButton:hover {
-  background-color: #B71C1C;
+.stockFormBox p a:hover {
+  text-decoration: underline;
 }

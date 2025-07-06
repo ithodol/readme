@@ -23,13 +23,11 @@ $result = $conn->query($sql);
 ?>
 
 <?php include '../header.php'; ?>
-
 <div class="loanListBox">
-    <h1>📚 전체 대출 관리</h1>
-    <hr>
+    <h1 class="loanListTitle">📚 전체 대출 관리</h1>
 
     <?php if ($result && $result->num_rows > 0): ?>
-        <table class="userTable" border="1" cellspacing="0" cellpadding="8" style="width:100%; border-collapse:collapse;">
+        <table class="loanTable">
             <thead>
                 <tr>
                     <th>회원 ID</th>
@@ -47,20 +45,21 @@ $result = $conn->query($sql);
                 <tr>
                     <td><?= htmlspecialchars($row['uid']) ?></td>
                     <td><?= htmlspecialchars($row['uname']) ?></td>
-                    <td><a href="../book/bookView.php?bno=<?= (int)$row['bno'] ?>"><?= htmlspecialchars($row['btitle']) ?></a></td>
+                    <td><a class="loanBookLink" href="../book/bookView.php?bno=<?= (int)$row['bno'] ?>"><?= htmlspecialchars($row['btitle']) ?></a></td>
                     <td><?= htmlspecialchars($row['briter']) ?></td>
                     <td><?= htmlspecialchars($row['ldate']) ?></td>
                     <td><?= htmlspecialchars($row['lddate']) ?></td>
                     <td><?= $row['lrdate'] ? htmlspecialchars($row['lrdate']) : '-' ?></td>
-                    <td><?= $row['lstate'] ? '반납 완료' : '<span style="color:red;">대출 중</span>' ?></td>
+                    <td class="loanState"><?= $row['lstate'] ? '반납 완료' : '<span class="loanPending">대출 중</span>' ?></td>
                 </tr>
             <?php endwhile; ?>
             </tbody>
         </table>
     <?php else: ?>
-        <p>대출 내역이 없습니다.</p>
+        <p class="loanEmptyMsg">대출 내역이 없습니다.</p>
     <?php endif; ?>
 </div>
+
 
 </body>
 </html>

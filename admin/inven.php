@@ -12,7 +12,7 @@ $adNo = $_SESSION['adno'];
 
 // itype 받아서 입고(0) 출고(1) 구분
 $itype = isset($_GET['itype']) && ($_GET['itype'] == '1') ? 1 : 0;
-$title = $itype === 0 ? "📥 입고 등록" : "📤 출고 등록";
+$title = $itype === 0 ? "입고 등록" : "출고 등록";
 $btnText = $itype === 0 ? "입고하기" : "출고하기";
 
 // 도서 리스트 가져오기 (선택할 수 있게)
@@ -89,29 +89,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <?php include '../header.php'; ?>
-<h2 class="invenTitle"><?= $title ?></h2>
-<p><a href="invenList.php">입출고 내역</a></p>
+<div class="stockFormBox">
+    <h2 class="stockTitle"><?= $title ?></h2>
+    <form method="post" action="inven.php?itype=<?= $itype ?>" class="stockForm">
+        <div class="formGroup">
+            <label for="bno">도서</label>
+            <select name="bno" id="bno" required>
+                <option value="">선택</option>
+                <?php while ($book = $resultBooks->fetch_assoc()): ?>
+                    <option value="<?= $book['bno'] ?>"><?= htmlspecialchars($book['btitle']) ?></option>
+                <?php endwhile; ?>
+            </select>
+        </div>
 
-<form method="post" action="inven.php?itype=<?= $itype ?>" class="invenForm">
-    <input type="hidden" name="itype" value="<?= $itype ?>">
+        <div class="formGroup">
+            <label for="icount">수량</label>
+            <input type="number" name="icount" id="icount" min="1" required>
+        </div>
 
-    <label for="bno">도서</label><br>
-    <select name="bno" id="bno" required>
-        <option value="">선택</option>
-        <?php
-        while ($book = $resultBooks->fetch_assoc()) {
-            echo '<option value="' . $book['bno'] . '">' . htmlspecialchars($book['btitle']) . '</option>';
-        }
-        ?>
-    </select><br><br>
+        <div class="formGroup">
+            <label for="imemo">메모</label>
+            <input type="text" name="imemo" id="imemo" maxlength="255" placeholder="필요시 입력">
+        </div>
 
-    <label for="icount">수량</label><br>
-    <input type="number" name="icount" id="icount" min="1" required><br><br>
+        <div class="stockBtnGroup">
+            <button type="submit" class="stockButton"><?= $btnText ?></button>
+            <button type="button" class="stockButton stockBack">
+                <a href="invenList.php">취소</a>
+            </button>
+        </div>
+    </form>
+</div>
 
-    <label for="imemo">메모</label><br>
-    <input type="text" name="imemo" id="imemo" maxlength="255" placeholder="필요시 입력"><br><br>
-
-    <button type="submit" class="invenButton"><?= $btnText ?></button>
-</form>
 </body>
 </html>

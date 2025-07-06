@@ -42,6 +42,7 @@ $result = $stmt->get_result();
 ?>
 
 <?php include '../header.php'; ?>
+<div class="invenBox">
     <h2 class="invenTitle">도서 입출고 내역</h2>
     <!-- 버튼 -->
     <div class="invenButtonWrapper">
@@ -102,5 +103,6 @@ $result = $stmt->get_result();
             </tbody>
         </table>
     </div>
+</div>
 </body>
 </html>
