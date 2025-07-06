@@ -127,3 +127,97 @@
   border-top: 1px solid #ddd;
   margin: 60px 0;
 }
+
+
+
+
+/* 수정 */
+.userEditCon {
+  width: 20%;
+  margin: 80px auto;
+  padding: 30px 40px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.08);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.editTitle {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+
+.userEditForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+
+.userEditForm p {
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.userEditForm p strong {
+  font-size: 1.05rem;
+  color: #222;
+  margin-top: 5px;
+}
+
+.userEditForm input[type="text"],
+.userEditForm input[type="password"] {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-top: 6px;
+  transition: border-color 0.3s ease;
+}
+
+.userEditForm input:focus {
+  outline: none;
+  border-color: black;
+}
+
+
+.userEditForm button {
+  padding: 15px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.userEditForm button[type="submit"] {
+  background-color: #4caf50;
+  color: white;
+}
+
+.userEditForm button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.userEditForm button[type="button"] {
+  background-color: #999;
+  color: white;
+}
+
+.userEditForm button[type="button"]:hover {
+  background-color: #777;
+}
+
+/* 버튼 안의 링크 */
+.userEditForm button a {
+  color: white;
+  text-decoration: none;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
