@@ -72,11 +72,11 @@ body {
 }
 
 .unavailable {
-    color: red;
+    color: #E53935;
     font-weight: bold;
 }
 .available{
-    color: blue;
+    color: #4CAF50;
     font-weight: bold;
 }
 

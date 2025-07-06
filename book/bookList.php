@@ -7,24 +7,14 @@ if (!isset($_SESSION['uno'])) {
     exit;
 }
 
-// ① URL 파라미터로 cno 받아오기 (없으면 전체)
 $cno = isset($_GET['cno']) ? intval($_GET['cno']) : 0;
 
-// ② 기본 SQL
-$sql = "SELECT b.bno, btitle, briter, bpub, bimg, bstate, 
-               SUM(i.istock) AS istock
-        FROM book b
-        JOIN inven i ON b.bno = i.bno";
-
-// ③ 카테고리 조건 추가
+// 도서 목록 먼저 가져오기
+$sql = "SELECT bno, btitle, briter, bpub, bimg, cno FROM book";
 if ($cno > 0) {
-    $sql .= " WHERE b.cno = $cno";
+    $sql .= " WHERE cno = $cno";
 }
-
-// ④ 그룹핑 및 정렬
-$sql .= " GROUP BY b.bno, btitle, briter, bpub, bimg, bstate
-          ORDER BY bno ASC";
-
+$sql .= " ORDER BY bno ASC";
 $resultBooks = $conn->query($sql);
 ?>
 
@@ -47,24 +37,45 @@ $resultBooks = $conn->query($sql);
 <div class="bookList">
 <?php
 if ($resultBooks->num_rows > 0) {
-    while ($bookItem = $resultBooks->fetch_assoc()) {
+    while ($book = $resultBooks->fetch_assoc()) {
+        $bno = $book['bno'];
+
+        // 최신 재고 확인
+        $sqlStock = "SELECT istock FROM inven WHERE bno = ? ORDER BY idate DESC LIMIT 1";
+        $stmtStock = $conn->prepare($sqlStock);
+        $stmtStock->bind_param("i", $bno);
+        $stmtStock->execute();
+        $resStock = $stmtStock->get_result();
+        $stock = 0;
+        if ($resStock->num_rows > 0) {
+            $rowStock = $resStock->fetch_assoc();
+            $stock = intval($rowStock['istock']);
+        }
+
+        // 현재 대출 중인지 확인
+        $sqlLoan = "SELECT COUNT(*) AS cnt FROM loan WHERE bno = ? AND lstate = 0";
+        $stmtLoan = $conn->prepare($sqlLoan);
+        $stmtLoan->bind_param("i", $bno);
+        $stmtLoan->execute();
+        $resLoan = $stmtLoan->get_result();
+        $isLoaned = false;
+        if ($resLoan->num_rows > 0) {
+            $rowLoan = $resLoan->fetch_assoc();
+            $isLoaned = intval($rowLoan['cnt']) > 0;
+        }
+
         echo '<div class="bookItem">';
-        echo '<a href="bookView.php?bno=' . $bookItem['bno'] . '">';
-        echo '<img src="../img/' . htmlspecialchars($bookItem['bimg']) . '" alt="' . htmlspecialchars($bookItem['btitle']) . '">';
-        echo '<h4>' . htmlspecialchars($bookItem['btitle']) . '</h4>';
+        echo '<a href="bookView.php?bno=' . $bno . '">';
+        echo '<img src="../img/' . htmlspecialchars($book['bimg']) . '" alt="' . htmlspecialchars($book['btitle']) . '">';
+        echo '<h4>' . htmlspecialchars($book['btitle']) . '</h4>';
         echo '</a>';
+        echo '<p>' . htmlspecialchars($book['briter']) . '</p>';
+        echo '<p>' . htmlspecialchars($book['bpub']) . '</p>';
 
-        echo '<p>' . htmlspecialchars($bookItem['briter']) . '</p>';
-        echo '<p>' . htmlspecialchars($bookItem['bpub']) . '</p>';
-
-        $currentStock = isset($bookItem['istock']) ? (int)$bookItem['istock'] : 0;
-
-        if ($bookItem['bstate'] == 0 && $currentStock > 0) {
+        if ($stock > 0 && !$isLoaned) {
             echo '<hr><p class="available">대출 가능</p>';
-        } elseif ($currentStock == 0) {
-            echo '<hr><p class="unavailable">현재 재고가 없어 대출이 불가합니다.</p>';
         } else {
-            echo '<hr><p class="unavailable">현재 대출 중입니다.</p>';
+            echo '<hr><p class="unavailable">대출 불가</p>';
         }
 
         echo '</div>';
@@ -74,6 +85,5 @@ if ($resultBooks->num_rows > 0) {
 }
 ?>
 </div>
-
 </body>
 </html>

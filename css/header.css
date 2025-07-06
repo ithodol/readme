@@ -38,8 +38,3 @@
     text-decoration: none;
 }
 
-
-/* 본문 내용이 헤더 아래에서 시작하도록 여백 추가 */
-.pageWrapper {
-    padding-top: 60px; /* 헤더 높이와 맞춤 */
-}

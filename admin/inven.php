@@ -43,6 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $currentStock = intval($rowStock['istock']);
     }
 
+    // 출고 수량이 재고보다 많으면 에러
     if ($postItype === 1 && $icount > $currentStock) {
         echo "<script>alert('출고 수량이 현재 재고보다 많을 수 없습니다.'); history.back();</script>";
         exit;
@@ -51,12 +52,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // 새 재고 계산
     $newStock = ($postItype === 0) ? $currentStock + $icount : $currentStock - $icount;
 
-    // insert inven
+    // insert inven 테이블에 입출고 기록 추가
     $sqlInsert = "INSERT INTO inven (itype, icount, istock, imemo, bno, adno) VALUES (?, ?, ?, ?, ?, ?)";
     $stmtInsert = $conn->prepare($sqlInsert);
     $stmtInsert->bind_param("iiisii", $postItype, $icount, $newStock, $imemo, $bno, $adNo);
 
     if ($stmtInsert->execute()) {
+
+        // 재고 총합 계산 (inven 테이블에서 해당 bno 재고 모두 합산)
+        $sqlSum = "SELECT SUM(istock) AS totalStock FROM inven WHERE bno = ?";
+        $stmtSum = $conn->prepare($sqlSum);
+        $stmtSum->bind_param("i", $bno);
+        $stmtSum->execute();
+        $resSum = $stmtSum->get_result();
+        $totalStock = 0;
+        if ($resSum->num_rows > 0) {
+            $rowSum = $resSum->fetch_assoc();
+            $totalStock = intval($rowSum['totalStock']);
+        }
+
+        // book 테이블의 bstate 업데이트
+        // 재고가 0 이하이면 1(대출불가), 그 외는 0(대출가능)
+        $newBstate = ($totalStock <= 0) ? 1 : 0;
+        $stmtUpdate = $conn->prepare("UPDATE book SET bstate = ? WHERE bno = ?");
+        $stmtUpdate->bind_param("ii", $newBstate, $bno);
+        $stmtUpdate->execute();
+
         echo "<script>alert('{$btnText}가 완료되었습니다.'); location.href='invenList.php';</script>";
         exit;
     } else {
@@ -68,29 +89,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <?php include '../header.php'; ?>
-    <h2 class="invenTitle"><?= $title ?></h2>
-    <p><a href="invenList.php">입출고 내역</a></p>
+<h2 class="invenTitle"><?= $title ?></h2>
+<p><a href="invenList.php">입출고 내역</a></p>
 
-    <form method="post" action="inven.php?itype=<?= $itype ?>" class="invenForm">
-        <input type="hidden" name="itype" value="<?= $itype ?>">
+<form method="post" action="inven.php?itype=<?= $itype ?>" class="invenForm">
+    <input type="hidden" name="itype" value="<?= $itype ?>">
 
-        <label for="bno">도서</label><br>
-        <select name="bno" id="bno" required>
-            <option value="">선택</option>
-            <?php
-            while ($book = $resultBooks->fetch_assoc()) {
-                echo '<option value="' . $book['bno'] . '">' . htmlspecialchars($book['btitle']) . '</option>';
-            }
-            ?>
-        </select><br><br>
+    <label for="bno">도서</label><br>
+    <select name="bno" id="bno" required>
+        <option value="">선택</option>
+        <?php
+        while ($book = $resultBooks->fetch_assoc()) {
+            echo '<option value="' . $book['bno'] . '">' . htmlspecialchars($book['btitle']) . '</option>';
+        }
+        ?>
+    </select><br><br>
 
-        <label for="icount">수량</label><br>
-        <input type="number" name="icount" id="icount" min="1" required><br><br>
+    <label for="icount">수량</label><br>
+    <input type="number" name="icount" id="icount" min="1" required><br><br>
 
-        <label for="imemo">메모</label><br>
-        <input type="text" name="imemo" id="imemo" maxlength="255" placeholder="필요시 입력"><br><br>
+    <label for="imemo">메모</label><br>
+    <input type="text" name="imemo" id="imemo" maxlength="255" placeholder="필요시 입력"><br><br>
 
-        <button type="submit" class="invenButton"><?= $btnText ?></button>
-    </form>
+    <button type="submit" class="invenButton"><?= $btnText ?></button>
+</form>
 </body>
 </html>
