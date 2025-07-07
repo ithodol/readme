@@ -3,8 +3,7 @@ PHP와 MySQL을 활용한 웹 기반 도서 관리 시스템입니다.
 <br><br><br>
 
 # 🎥 프로젝트 시연영상
-
-[프로젝트 시연영상 링크] https://youtu.be/1d1hqOfiLG0
+ https://youtu.be/1d1hqOfiLG0
 
 <br><br><br>
 
