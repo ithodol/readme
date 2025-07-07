@@ -2,7 +2,6 @@
 session_start();
 include '../db.php';
 
-// 로그인 체크
 if (!isset($_SESSION['uno'])) {
     echo "<script>alert('로그인 후 이용해주세요.'); location.href='../user/login.php';</script>";
     exit;
@@ -18,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $bno = intval($_POST['bno']);
 
-    // 현재 재고 조회 (가장 최신 재고)
+    // 현재 재고 조회
     $sqlStock = "SELECT istock FROM inven WHERE bno = ? ORDER BY idate DESC LIMIT 1";
     $stmtStock = $conn->prepare($sqlStock);
     $stmtStock->bind_param("i", $bno);
@@ -38,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // 해당 도서가 현재 대출중인지 확인 (lstate=0인 대출 내역 존재 여부)
+    // 대출 중인지 확인
     $sqlLoanCheck = "SELECT COUNT(*) AS cnt FROM loan WHERE bno = ? AND lstate = 0";
     $stmtLoanCheck = $conn->prepare($sqlLoanCheck);
     $stmtLoanCheck->bind_param("i", $bno);
@@ -53,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // 대출 내역 추가
     $today = date('Y-m-d');
-    $returnDate = date('Y-m-d', strtotime('+7 days')); // 7일 후 반납 예정일
+    $returnDate = date('Y-m-d', strtotime('+7 days')); 
 
     $stmtLoan = $conn->prepare("INSERT INTO loan (ldate, lddate, lrdate, lstate, uno, bno) VALUES (?, ?, NULL, 0, ?, ?)");
     $stmtLoan->bind_param("ssii", $today, $returnDate, $uno, $bno);
@@ -64,13 +63,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // 재고 출고 기록 추가 (itype=1, icount=1, istock=currentStock-1)
+    // 재고 출고 
     $newStock = $currentStock - 1;
     $imemo = "대출 출고";
-    // 관리자 세션 없으면 null
+
     $adNo = isset($_SESSION['adno']) ? intval($_SESSION['adno']) : null;
 
-    // adno가 null일 경우 쿼리에 NULL 직접 넣기 위해 분기 처리
+
     if (is_null($adNo)) {
         $sqlInsert = "INSERT INTO inven (itype, icount, istock, imemo, bno, adno) VALUES (1, 1, ?, ?, ?, NULL)";
         $stmtInsert = $conn->prepare($sqlInsert);
@@ -83,7 +82,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmtInsert->execute();
 
     if ($stmtInsert->affected_rows === 0) {
-        // 롤백: 대출 내역 삭제
         $conn->query("DELETE FROM loan WHERE lno = " . $stmtLoan->insert_id);
         echo "<script>alert('재고 출고 처리 중 오류가 발생했습니다.'); history.back();</script>";
         exit;

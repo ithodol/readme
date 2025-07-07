@@ -27,7 +27,6 @@ if ($resultAll->num_rows > 0) {
     while ($book = $resultAll->fetch_assoc()) {
         $bno = $book['bno'];
 
-        // 현재 재고 확인
         $sqlStock = "SELECT istock FROM inven WHERE bno = ? ORDER BY idate DESC LIMIT 1";
         $stmtStock = $conn->prepare($sqlStock);
         $stmtStock->bind_param("i", $bno);

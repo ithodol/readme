@@ -38,8 +38,8 @@ body {
     display: grid;
     grid-template-columns: repeat(5, 260px);
     gap: 20px;
-    justify-content: center;   /* 전체 그리드 묶음을 중앙으로 */
-    justify-items: center;     /* 각 셀 안 요소(.bookItem)를 가운데 정렬 */
+    justify-content: center;   
+    justify-items: center;   
     margin: 30px 0px;
 }
 
@@ -102,7 +102,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* 뷰포트 기준 높이 */
+    height: 100vh; 
     background-color: #f5f5f5;
 }
 .loginCont {

@@ -29,7 +29,7 @@ if ($result->num_rows == 0) {
 }
 $book = $result->fetch_assoc();
 
-// 현재 재고 확인 (최신 입고/출고 재고)
+// 현재 재고 확인
 $sqlStock = "SELECT istock FROM inven WHERE bno = ? ORDER BY idate DESC LIMIT 1";
 $stmtStock = $conn->prepare($sqlStock);
 $stmtStock->bind_param("i", $bNo);

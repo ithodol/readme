@@ -2,13 +2,12 @@
 session_start();
 include '../db.php';
 
-// 관리자 로그인 체크
+
 if (!isset($_SESSION['adno'])) {
     echo "<script>alert('관리자 로그인 후 이용하세요.'); location.href='../admin/login.php';</script>";
     exit;
 }
 
-// 회원 목록 조회 (모든 회원 포함)
 $sql = "SELECT uno, uid, uname, uphone, ustate, udelete FROM user ORDER BY uno ASC";
 $result = $conn->query($sql);
 ?>

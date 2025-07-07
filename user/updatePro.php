@@ -12,7 +12,6 @@ $uname = $_POST['uname'];
 $uphone = $_POST['uphone'];
 $upwd = $_POST['upwd'];
 
-// 비밀번호 입력 여부에 따라 쿼리 분기
 if (!empty($upwd)) {
     $sql = "UPDATE user SET uname = ?, uphone = ?, upwd = ? WHERE uno = ?";
     $stmt = $conn->prepare($sql);
@@ -24,7 +23,6 @@ if (!empty($upwd)) {
 }
 
 if ($stmt->execute()) {
-    // 세션 이름도 업데이트
     $_SESSION['uname'] = $uname;
     echo "<script>alert('회원 정보가 수정되었습니다.'); location.href='info.php';</script>";
 } else {

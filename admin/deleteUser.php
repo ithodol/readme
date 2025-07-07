@@ -13,7 +13,7 @@ if ($uno <= 0) {
     exit;
 }
 
-// 탈퇴 처리: udelete = 1, ustate = 1 (대출 불가능)
+// 탈퇴
 $sql = "UPDATE user SET udelete = 1, ustate = 1 WHERE uno = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $uno);

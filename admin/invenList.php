@@ -7,11 +7,10 @@ if (!isset($_SESSION['adno'])) {
     exit;
 }
 
-// 날짜 필터 (하루 기준)
+
 $filterDate = isset($_GET['date']) ? $_GET['date'] : '';
 $dateValid = preg_match('/^\d{4}-\d{2}-\d{2}$/', $filterDate);
 
-// 기본 쿼리
 $sql = "
     SELECT i.ino, i.itype, i.icount, i.istock, i.idate, i.imemo,
            b.bno, b.btitle,
@@ -21,22 +20,22 @@ $sql = "
     LEFT JOIN admin a ON i.adno = a.adno
 ";
 
-// 조건 추가 (하루 선택된 경우)
+
 if ($dateValid) {
     $sql .= " WHERE DATE(i.idate) = ? ";
 }
 
-$sql .= " ORDER BY i.idate DESC";  // ORDER BY는 항상 제일 마지막
+$sql .= " ORDER BY i.idate DESC";  
 
-// 쿼리 준비
+
 $stmt = $conn->prepare($sql);
 
-// 파라미터 바인딩
+
 if ($dateValid) {
     $stmt->bind_param("s", $filterDate);
 }
 
-// 실행 및 결과
+
 $stmt->execute();
 $result = $stmt->get_result();
 ?>

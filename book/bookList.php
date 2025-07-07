@@ -9,7 +9,7 @@ if (!isset($_SESSION['uno'])) {
 
 $cno = isset($_GET['cno']) ? intval($_GET['cno']) : 0;
 
-// 도서 목록 먼저 가져오기
+// 도서 목록
 $sql = "SELECT bno, btitle, briter, bpub, bimg, cno FROM book";
 if ($cno > 0) {
     $sql .= " WHERE cno = $cno";

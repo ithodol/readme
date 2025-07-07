@@ -2,7 +2,7 @@
 session_start();
 include '../db.php';
 
-// 로그인 체크
+
 if (!isset($_SESSION['uno'])) {
     echo "<script>alert('로그인 후 이용해주세요.'); location.href='../user/login.php';</script>";
     exit;
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $bno = $loan['bno'];
 
-    // 반납 처리: loan 테이블 업데이트
+    // 반납 처리
     $stmtUpdate = $conn->prepare("UPDATE loan SET lstate = 1, lrdate = NOW() WHERE lno = ?");
     $stmtUpdate->bind_param("i", $lno);
     $stmtUpdate->execute();
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $newStock = $currentStock + 1;
     $memo = '사용자 반납';
 
-    // inven 테이블에 입고 기록 추가 (관리자 없음: adno=NULL)
+    // 입고 추가
     $stmtInsert = $conn->prepare("INSERT INTO inven (itype, icount, istock, imemo, bno, adno) VALUES (0, 1, ?, ?, ?, NULL)");
     $stmtInsert->bind_param("isi", $newStock, $memo, $bno);
     $stmtInsert->execute();

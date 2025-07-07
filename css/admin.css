@@ -50,14 +50,13 @@
   padding: 30px;
 }
 
-/* 제목 */
+
 .loanListTitle {
   text-align: center;
   font-weight: bold;
   margin-bottom: 40px;
 }
 
-/* 테이블 스타일 */
 .loanTable {
   width: 100%;
   border-collapse: collapse;
@@ -77,13 +76,13 @@
 }
 
 
-/* 링크 스타일 */
+
 .loanBookLink {
   font-weight: 500;
   text-decoration: none;
 }
 
-/* 상태 텍스트 */
+
 .loanState {
   font-weight: bold;
 }
@@ -104,7 +103,6 @@
 
 
 /* 회원관리 */
-/* 전체 컨테이너 */
 .userListBox {
   max-width: 1000px;
   margin: 60px auto;
@@ -112,7 +110,7 @@
   border-radius: 12px;
 }
 
-/* 제목 */
+
 .userListTitle {
   text-align: center;
   font-size: 2rem;
@@ -120,7 +118,6 @@
 }
 
 
-/* 테이블 스타일 */
 .userTableAdmin {
   width: 100%;
   border-collapse: collapse;
@@ -138,7 +135,7 @@
   color: white;
 }
 
-/* 상태 스타일 */
+
 .userStateActive {
   font-weight: bold;
 }
@@ -169,11 +166,7 @@
 
 
 
-
-
-/* 📚 도서 입출고 내역 페이지 */
-
-/* 도서 입출고 페이지 전체 박스 */
+/* 입출고 내역 */
 .invenBox {
   max-width: 1100px;
   margin: 60px auto;
@@ -189,7 +182,7 @@
   margin-bottom: 40px;
 }
 
-/* 버튼 묶음 */
+
 .invenButtonWrapper {
   display: flex;
   justify-content: flex-end;
@@ -198,7 +191,7 @@
   max-width: 1100px;
 }
 
-/* 입고/출고 버튼 공통 */
+
 .invenButton {
   padding: 10px 20px;
   font-size: 0.95rem;
@@ -210,7 +203,7 @@
   color: white;
 }
 
-/* 입고 버튼 */
+
 .inButton {
   background-color: #4CAF50;
 }
@@ -218,7 +211,6 @@
   background-color: #45a049;
 }
 
-/* 출고 버튼 */
 .outButton {
   background-color: #E53935;
 }
@@ -226,7 +218,7 @@
   background-color: #B71C1C;
 }
 
-/* 날짜 필터 폼 */
+
 .dateFilterForm {
   display: flex;
   align-items: center;
@@ -254,7 +246,7 @@
   background-color: gray;
 }
 
-/* 테이블 영역 */
+
 .invenTableWrapper {
   max-width: 1100px;
   margin: 0 auto 60px;
@@ -285,7 +277,7 @@
   background-color: #fafafa;
 }
 
-/* 입고/출고 컬러 강조 */
+
 .inType {
   color: #2e7d32;
   font-weight: bold;
@@ -296,7 +288,7 @@
   font-weight: bold;
 }
 
-/* 관리자 이름 강조 */
+
 .invenTable td:last-child {
   font-style: italic;
   color: #333;
@@ -323,7 +315,7 @@
   margin-bottom: 40px;
 }
 
-/* 📄 폼 스타일 */
+
 .stockForm {
   display: flex;
   flex-direction: column;
@@ -337,7 +329,7 @@
 
 .formGroup label {
   font-weight: bold;
-  margin-bottom: 6px; /* label과 입력 필드 간 간격 */
+  margin-bottom: 6px; 
 }
 
 .stockForm label {
@@ -361,7 +353,7 @@
   color: #aaa;
 }
 
-/* 버튼 */
+
 .stockButton {
   width: 100%;
   padding: 12px;
@@ -379,7 +371,7 @@
   background-color: #ccc;
 }
 
-/* 취소 버튼 배경색만 변경 */
+
 .stockBack {
   background-color: #ccc;
 }
@@ -388,7 +380,6 @@
   background-color: #999;
 }
 
-/* 버튼 안 a 태그 강제 스타일 */
 .stockBack a {
   display: block;
   width: 100%;
@@ -403,15 +394,15 @@
   color: white;
 }
 
-/* 버튼 그룹 */
+
 .stockBtnGroup {
   display: flex;
-  flex-direction: column; /* 또는 row */
+  flex-direction: column; 
   gap: 8px;
   margin-top: 10px;
 }
 
-/* 링크 */
+
 .stockFormBox p {
   text-align: center;
 }

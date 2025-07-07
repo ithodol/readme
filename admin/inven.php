@@ -2,7 +2,7 @@
 session_start();
 include '../db.php';
 
-// 관리자 로그인 체크
+
 if (!isset($_SESSION['adno'])) {
     echo "<script>alert('관리자 로그인 후 이용하세요.'); location.href='../admin/login.php';</script>";
     exit;
@@ -10,24 +10,23 @@ if (!isset($_SESSION['adno'])) {
 
 $adNo = $_SESSION['adno'];
 
-// itype 받아서 입고(0) 출고(1) 구분 (GET은 화면 표시용)
+
 $itype = isset($_GET['itype']) && ($_GET['itype'] == '1') ? 1 : 0;
 $title = $itype === 0 ? "입고 등록" : "출고 등록";
 $btnText = $itype === 0 ? "입고하기" : "출고하기";
 
-// 도서 리스트 가져오기 (선택할 수 있게)
+
 $sqlBooks = "SELECT bno, btitle FROM book ORDER BY btitle ASC";
 $resultBooks = $conn->query($sqlBooks);
 
-// 입출고 처리
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // POST의 itype 값을 반드시 사용
+
     $postItype = isset($_POST['itype']) ? intval($_POST['itype']) : null;
     $bno = isset($_POST['bno']) ? intval($_POST['bno']) : 0;
     $icount = isset($_POST['icount']) ? intval($_POST['icount']) : 0;
     $imemo = isset($_POST['imemo']) ? trim($_POST['imemo']) : '';
 
-    // 유효성 검사
     if ($postItype === null || ($postItype !== 0 && $postItype !== 1)) {
         echo "<script>alert('입출고 유형이 올바르지 않습니다.'); history.back();</script>";
         exit;
@@ -37,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // 현재 재고 조회 (가장 최신 재고)
+    // 현재 재고 조회
     $sqlStock = "SELECT istock FROM inven WHERE bno = ? ORDER BY idate DESC LIMIT 1";
     $stmtStock = $conn->prepare($sqlStock);
     $stmtStock->bind_param("i", $bno);
@@ -49,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $currentStock = intval($rowStock['istock']);
     }
 
-    // 출고 수량이 재고보다 많으면 에러
+
     if ($postItype === 1 && $icount > $currentStock) {
         echo "<script>alert('출고 수량이 현재 재고보다 많을 수 없습니다.'); history.back();</script>";
         exit;
@@ -58,13 +57,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // 새 재고 계산
     $newStock = ($postItype === 0) ? $currentStock + $icount : $currentStock - $icount;
 
-    // insert inven 테이블에 입출고 기록 추가
     $sqlInsert = "INSERT INTO inven (itype, icount, istock, imemo, bno, adno) VALUES (?, ?, ?, ?, ?, ?)";
     $stmtInsert = $conn->prepare($sqlInsert);
     $stmtInsert->bind_param("iiisii", $postItype, $icount, $newStock, $imemo, $bno, $adNo);
 
     if ($stmtInsert->execute()) {
-        // bstate 업데이트 코드 삭제 (필요 없으므로)
 
         echo "<script>alert('{$btnText}가 완료되었습니다.'); location.href='invenList.php';</script>";
         exit;
