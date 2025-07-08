@@ -73,7 +73,7 @@ CREATE TABLE book (
     briter VARCHAR(50) NOT NULL,             
     bpub VARCHAR(50) NOT NULL,               
     bimg VARCHAR(100),                        
-    sno INT unsigned,                         
+    sno INT unsigned NOT NULL,                         
     cno INT unsigned NOT NULL,
     constraint primary key (bno),
     constraint foreign key(sno) references slot(sno) on update cascade on delete cascade,
@@ -185,6 +185,36 @@ INSERT INTO inven (itype, icount, istock, imemo, bno, adno) VALUES
 (0, 8, 8, '초도 입고', 31, 3),
 (1, 2, 6, '불량', 31, 3),
 (1, 1, 5, '이동출고', 31, 3);
+
+
+
+# 공지사항 게시판
+CREATE TABLE notice (
+    nno INT UNSIGNED AUTO_INCREMENT,
+    ntit VARCHAR(30) NOT NULL,
+    ncontent VARCHAR(200) NOT NULL,
+    nview INT NOT NULL DEFAULT 0,
+    nimg VARCHAR(255),
+    adno INT UNSIGNED NOT NULL,
+    ndate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT PRIMARY KEY (nno),
+    constraint foreign key(adno) references admin(adno) on update cascade on delete cascade
+);
+
+INSERT INTO notice (ntit, ncontent, nview, nimg, adno) VALUES 
+('시스템 점검 안내', '7월 10일(수) 새벽 2시부터 오전 4시까지 시스템 점검이 예정되어 있습니다. 점검 시간 동안 홈페이지 접속 및 도서 검색, 대출/반납 서비스 이용이 불가하오니 이용에 참고 부탁드립니다.', 0, NULL, 1),
+
+('신간 도서 입고 안내', '7월 한 달간 새롭게 입고된 신간 도서 목록이 등록되었습니다. 다양한 장르의 최신 도서를 구비하였으니 많은 관심과 이용 부탁드립니다. 신착 도서는 홈 화면에서 확인하실 수 있습니다.', 0, NULL, 2),
+
+('홈페이지 개편', '이용자 편의성을 높이기 위해 홈페이지 UI가 새롭게 개편되었습니다. 보다 간편해진 검색 기능과 모바일 최적화를 통해 언제 어디서든 도서 서비스를 편리하게 이용하실 수 있습니다.', 0, NULL, 1),
+
+('여름 휴가 일정', '도서관 여름 휴가 일정은 8월 1일(목)부터 8월 5일(월)까지입니다. 이 기간에는 도서 대출/반납 및 회원가입 등의 서비스가 제한되오니, 사전 이용을 부탁드립니다. 휴가 이후에는 정상 운영됩니다.', 0, NULL, 2),
+
+('이벤트 안내', '도서 대출 이벤트가 진행 중입니다! 기간 내 도서를 대출하신 분들께 추첨을 통해 다양한 선물을 드립니다. 참여 방법 및 자세한 내용은 아래 이미지를 참고해주세요. 많은 참여 바랍니다!', 0, NULL, 1);
+
+
+
+
 
 select * from book ;
 

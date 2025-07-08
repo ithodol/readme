@@ -13,6 +13,9 @@
     <form action="bookListAll.php" method="get">
         <button type="submit" class="adminBtn">도서 관리</button>
     </form>
+    <form action="../board/notice.php" method="get">
+        <button type="submit" class="adminBtn">공지사항 관리</button>
+    </form>
   </div>
 </div>
 

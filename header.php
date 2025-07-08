@@ -13,6 +13,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <link rel="stylesheet" href="/readme/css/book.css">
     <link rel="stylesheet" href="/readme/css/user.css">
     <link rel="stylesheet" href="/readme/css/admin.css">
+    <link rel="stylesheet" href="/readme/css/board.css">
 </head>
 <body>
     <header class="globalHeader">

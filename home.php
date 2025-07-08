@@ -78,23 +78,56 @@ if ($resultAll->num_rows > 0) {
         <?php endif; ?>
     </div>
     <a href="./book/bookList.php" class="moreButton">더 보기</a>
+    
 </div>
 
-<!-- 공지사항 -->
-<!-- <h1 class="noticeTitle">📢 공지사항</h1>
-<?php
-$notices = $conn->query("SELECT nno, ntitle, ndate FROM notice ORDER BY ndate DESC LIMIT 3");
+<hr class="homeHr">
 
-if ($notices && $notices->num_rows > 0) {
-    echo "<ul class=\"noticeList\">";
-    while ($notice = $notices->fetch_assoc()) {
-        echo "<li class=\"noticeItem\">" . htmlspecialchars($notice['ndate']) . " - <strong>" . htmlspecialchars($notice['ntitle']) . "</strong></li>";
-    }
-    echo "</ul>";
-} else {
-    echo "<p class=\"noNotices\">등록된 공지사항이 없습니다.</p>";
-}
-?> -->
+<!-- 공지사항 -->
+<?php
+$sql = "SELECT n.nno, n.ntit, n.ndate, n.nview, a.adname 
+        FROM notice n
+        JOIN admin a ON n.adno = a.adno
+        ORDER BY n.nno DESC
+        LIMIT 5";
+
+$result = $conn->query($sql);
+?>
+
+<div class="noticeBoard">
+    <h1>📢 공지사항</h1>
+    <table class="noticeTable">
+        <thead>
+            <tr>
+                <th style="width: 5%;">번호</th>
+                <th style="width: 65%;">제목</th>
+                <th>작성일</th>
+                <th>작성자</th>
+                <th>조회수</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php while ($row = $result->fetch_assoc()) { ?>
+                <tr>
+                    <td><?= $row['nno'] ?></td>
+                    <td class="noticeTitle" style="text-align: left; padding:10px 20px;">
+                        <a href="/readme/board/noticeView.php?nno=<?= $row['nno'] ?>">
+                            <?= htmlspecialchars($row['ntit']) ?>
+                        </a>
+                    </td>
+                    <td><?= substr($row['ndate'], 0, 10) ?></td>
+                    <td><?= htmlspecialchars($row['adname']) ?></td>
+                    <td><?= $row['nview'] ?></td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+
+    <!-- 더보기 버튼 -->
+    <div class="noticeMore">
+        <a href="/readme/board/notice.php" class="moreButton">더보기</a>
+    </div>
+</div>
 
 </body>
 </html>

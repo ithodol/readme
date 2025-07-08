@@ -18,7 +18,7 @@ if (!$btitle || !$briter || !$bpub || !$sno || !$cno) {
 $bimg = 'default.png';  // 기본값
 
 if (isset($_FILES['bimg']) && $_FILES['bimg']['error'] === 0) {
-    $uploadDir = '../img/';
+    $uploadDir = '../upload/';
     $fileName = time() . '_' . basename($_FILES['bimg']['name']);
     $targetPath = $uploadDir . $fileName;
 
