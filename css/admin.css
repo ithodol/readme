@@ -358,7 +358,7 @@
 }
 
 
-.stockButton, .bookAddBtn{
+.stockButton, .bookAddBtn, .updateBtn{
   width: 100%;
   padding: 12px;
   background-color: black;
@@ -371,17 +371,17 @@
   transition: background-color 0.3s ease;
 }
 
-.stockButton:hover, .bookAddBtn:hover{
+.stockButton:hover, .bookAddBtn:hover, .updateBtn:hover{
   background-color: #ccc;
   color: black;
 }
 
 
-.stockBack, .bookAddBack {
+.stockBack, .bookAddBack, .updateBack {
   background-color: #ccc;
 }
 
-.stockBack:hover,.bookAddBack:hover {
+.stockBack:hover,.bookAddBack:hover, .updateBack:hover {
   background-color: #999;
 }
 
@@ -395,7 +395,7 @@
 
 
 
-.stockBtnGroup, .bookAddBtnGroup {
+.stockBtnGroup, .bookAddBtnGroup, .bookUpdateBtnGroup {
   display: flex;
   flex-direction: column; 
   gap: 8px;
@@ -558,7 +558,7 @@
 
 /* 신규 도서 등록 */
 .bookAddWrapper {
-  width: 30%;
+  width: 20%;
   margin: 60px auto;
   padding: 30px;
   background-color: #fff;
@@ -570,6 +570,7 @@
   text-align: center;
   font-weight: bold;
   margin-bottom: 40px;
+  margin-top: 0px;
   color: #333;
 }
 
@@ -602,3 +603,60 @@
 
 
 
+
+
+.bookUpdateWrapper {
+  width: 20%;
+  margin: 60px auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.bookUpdateTitle {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 40px;
+  margin-top: 0px;
+  color: #333;
+  font-size: 1.5rem;
+}
+
+.bookUpdateForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-size: 14px;
+}
+
+.updateField {
+  display: flex;
+  flex-direction: column;
+}
+
+.updateField label {
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #444;
+  font-size: 16px;
+}
+
+.updateField input[type="text"],
+.updateField select,
+.updateField input[type="file"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 0;
+}
+
+.updateField small {
+  color: #777;
+  font-size: 0.85rem;
+  margin-top: 4px;
+  display: block;
+}

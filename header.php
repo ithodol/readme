@@ -21,7 +21,7 @@ if (session_status() === PHP_SESSION_NONE) {
             <div class="loginStatus">
             <?php
             if (isset($_SESSION['adno'])) {
-                echo "<strong>" . htmlspecialchars($_SESSION['adname']) . "</strong>님 환영합니다. 
+                echo "<strong>" . htmlspecialchars($_SESSION['adname']) . "</strong>님 
                       <a href='/readme/admin/logout.php'>로그아웃</a>  
                       <a href='/readme/admin/info.php'>관리자 전용</a>";
             } else if (isset($_SESSION['uno'])) {
