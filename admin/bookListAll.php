@@ -47,7 +47,7 @@ $result = mysqli_query($conn, $sql);
                 <th>관리</th>
             </tr>
         </thead>
-        <!-- 테이블 내용 -->
+
         <tbody>
         <?php
         if ($result && mysqli_num_rows($result) > 0) {
@@ -71,16 +71,20 @@ $result = mysqli_query($conn, $sql);
                 echo "<td class='bookManageCell'>";
                 echo "<div class='bookEditBtnBox'>";
 
+                // 수정 버튼
                 echo "<a href='bookUpdate.php?bno={$row['bno']}' class='bookUpdateBtn'>수정</a> ";
 
+                // 삭제 버튼 (form 방식, POST)
                 if ($stock === 0) {
-                    echo "<a href='bookDelete.php?bno={$row['bno']}' class='bookDeleteBtn' onclick='return confirm(\"정말 삭제하시겠습니까?\")'>삭제</a>";
+                    echo "<form method='post' action='bookDeletePro.php' onsubmit='return confirm(\"정말 삭제하시겠습니까?\");' style='display:inline;'>";
+                    echo "<input type='hidden' name='bno' value='{$row['bno']}'>";
+                    echo "<button type='submit' class='bookDeleteBtn'>삭제</button>";
+                    echo "</form>";
                 } else {
-                    echo "<a href='#' class='bookDeleteBtn disabled' onclick='alert(\"재고가 존재합니다. 삭제할 수 없습니다.\"); return false;'>삭제</a>";
+                    echo "<button class='bookDeleteBtn disabled' onclick='alert(\"재고가 존재합니다. 삭제할 수 없습니다.\"); return false;'>삭제</button>";
                 }
 
                 echo "</div></td></tr>";
-
                 $no++;
             }
         } else {
@@ -88,6 +92,7 @@ $result = mysqli_query($conn, $sql);
         }
         ?>
         </tbody>
+
 
     </table>
 

@@ -501,6 +501,9 @@
   border-radius: 4px;
 }
 
+
+
+
 /* 도서 수정/삭제 */
 .bookManageCell {
   padding: 16px 8px;
@@ -516,7 +519,8 @@
   justify-content: center;
 }
 /* 수정 버튼 */
-.bookUpdateBtn {
+.bookUpdateBtn, .bookDeleteBtn {
+  box-sizing: border-box;
   display: inline-block;
   padding: 6px 14px;
   font-size: 0.9rem;
@@ -524,9 +528,11 @@
   text-decoration: none;
   font-weight: bold;
   transition: 0.2s ease;
-  width: 70px;
+  width: 100px;
   text-align: center;
   background-color: #ccc;
+  border: none;
+  cursor: pointer;
 }
 .bookUpdateBtn:hover {
   background-color: #999;
@@ -534,15 +540,6 @@
 
 /* 삭제 버튼 */
 .bookDeleteBtn {
-  display: inline-block;
-  padding: 6px 14px;
-  font-size: 0.9rem;
-  border-radius: 4px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: 0.2s ease;
-  width: 70px;
-  text-align: center;
   background-color: #D32F2F;
   color: white;
 }
