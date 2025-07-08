@@ -2,10 +2,6 @@
 session_start();
 include '../db.php';
 
-if (!isset($_SESSION['uno'])) {
-    echo "<script>alert('로그인 후 이용해주세요.'); location.href='../user/login.php';</script>";
-    exit;
-}
 
 $bNo = isset($_GET['bno']) ? intval($_GET['bno']) : 0;
 if ($bNo <= 0) {
@@ -88,8 +84,11 @@ $canLoan = $currentStock > 0 && !$isLoaned;
 
             <form class="loanForm" method="post" action="loanPro.php">
                 <input type="hidden" name="bno" value="<?= $book['bno'] ?>">
-                <button type="submit" class="loanButton" <?= $canLoan ? '' : 'disabled style="background-color: #E53935; cursor: not-allowed;"' ?>
-                ><?= $canLoan ? '대출하기' : '대출 불가' ?></button>
+                <input type="hidden" name="return" value="bookView.php?bno=<?= $book['bno'] ?>">
+                <button type="submit" class="loanButton"
+                    <?= $canLoan ? '' : 'disabled style="background-color: #E53935; cursor: not-allowed;"' ?>>
+                    <?= $canLoan ? '대출하기' : '대출 불가' ?>
+                </button>
             </form>
 
             <p class="backLink"><a href="bookList.php">도서 목록</a></p>

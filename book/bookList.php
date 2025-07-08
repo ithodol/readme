@@ -2,10 +2,6 @@
 session_start();
 include '../db.php';
 
-if (!isset($_SESSION['uno'])) {
-    echo "<script>alert('로그인 후 이용해주세요.'); location.href='../user/login.php';</script>";
-    exit;
-}
 
 $cno = isset($_GET['cno']) ? intval($_GET['cno']) : 0;
 
