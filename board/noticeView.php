@@ -51,8 +51,8 @@ $row = $result->fetch_assoc();
         <a href="notice.php" class="backBtn">목록</a>
         <br>
         <?php if (isset($_SESSION['adno'])): ?>
-            <a href="noticeEdit.php?nno=<?= $nno ?>" class="editBtn">수정</a>
-            <a href="noticeDelete.php?nno=<?= $nno ?>" class="deleteBtn" onclick="return confirm('정말 삭제하시겠습니까?');">삭제</a>
+            <a href="noticeUpdate.php?nno=<?= $nno ?>" class="editBtn">수정</a>
+            <a href="noticeDeletePro.php?nno=<?= $nno ?>" class="deleteBtn" onclick="return confirm('정말 삭제하시겠습니까?');">삭제</a>
         <?php endif; ?>
     </div>
 </div>
