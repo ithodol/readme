@@ -7,7 +7,6 @@ if (!isset($_SESSION['adno'])) {
     exit;
 }
 
-// 도서 목록 조회
 $sql = "
     SELECT 
         b.bno, b.btitle, b.briter, b.bpub, b.bimg,
@@ -70,11 +69,8 @@ $result = mysqli_query($conn, $sql);
 
                 echo "<td class='bookManageCell'>";
                 echo "<div class='bookEditBtnBox'>";
-
-                // 수정 버튼
                 echo "<a href='bookUpdate.php?bno={$row['bno']}' class='bookUpdateBtn'>수정</a> ";
 
-                // 삭제 버튼 (form 방식, POST)
                 if ($stock === 0) {
                     echo "<form method='post' action='bookDeletePro.php' onsubmit='return confirm(\"정말 삭제하시겠습니까?\");' style='display:inline;'>";
                     echo "<input type='hidden' name='bno' value='{$row['bno']}'>";
