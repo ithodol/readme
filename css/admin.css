@@ -295,6 +295,10 @@
 }
 
 
+.newBookButton{
+  background-color: black;
+}
+
 
 
 
@@ -354,7 +358,7 @@
 }
 
 
-.stockButton {
+.stockButton, .bookAddBtn{
   width: 100%;
   padding: 12px;
   background-color: black;
@@ -367,35 +371,31 @@
   transition: background-color 0.3s ease;
 }
 
-.stockButton:hover {
+.stockButton:hover, .bookAddBtn:hover{
   background-color: #ccc;
+  color: black;
 }
 
 
-.stockBack {
+.stockBack, .bookAddBack {
   background-color: #ccc;
 }
 
-.stockBack:hover {
+.stockBack:hover,.bookAddBack:hover {
   background-color: #999;
 }
 
-.stockBack a {
+.stockBack a , .bookAddBack a {
   display: block;
   width: 100%;
   height: 100%;
-  color: inherit;
   text-decoration: none;
   text-align: center;
-  line-height: 1;
-}
-
-.stockBack:hover a {
-  color: white;
 }
 
 
-.stockBtnGroup {
+
+.stockBtnGroup, .bookAddBtnGroup {
   display: flex;
   flex-direction: column; 
   gap: 8px;
@@ -416,3 +416,189 @@
 .stockFormBox p a:hover {
   text-decoration: underline;
 }
+
+
+
+
+
+
+/* 도서 전체 목록 */
+
+/* 박스 정렬 */
+.bookListWrapper {
+  max-width: 1100px;
+  margin: 60px auto;
+  padding: 30px;
+}
+
+/* 제목 */
+.bookListTitle {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: black;
+  margin-bottom: 40px;
+}
+
+/* 메뉴 버튼 */
+.bookListMenu {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.bookListMenuLink {
+  padding: 10px 20px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 6px;
+  color: white;
+  background-color: black;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.bookListMenuLink:hover {
+  background-color: gray;
+}
+
+
+/* 테이블 */
+.bookListTable {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+.bookListTable th,
+.bookListTable td {
+  border: 1px solid #ddd;
+  padding: 12px 10px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.bookListTable th {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+}
+
+.bookListTable tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+/* 도서 이미지 */
+.bookListImage {
+  width: 80px;
+  height: 100%;
+  max-height: 630px;
+  object-fit: cover;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* 도서 수정/삭제 */
+.bookManageCell {
+  padding: 16px 8px;
+  vertical-align: middle;
+}
+
+.bookEditBtnBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  height: 100%;
+  justify-content: center;
+}
+/* 수정 버튼 */
+.bookUpdateBtn {
+  display: inline-block;
+  padding: 6px 14px;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.2s ease;
+  width: 70px;
+  text-align: center;
+  background-color: #ccc;
+}
+.bookUpdateBtn:hover {
+  background-color: #999;
+}
+
+/* 삭제 버튼 */
+.bookDeleteBtn {
+  display: inline-block;
+  padding: 6px 14px;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.2s ease;
+  width: 70px;
+  text-align: center;
+  background-color: #D32F2F;
+  color: white;
+}
+.bookDeleteBtn:hover {
+  background-color: #B71C1C;
+}
+
+
+
+
+
+
+
+/* 신규 도서 등록 */
+.bookAddWrapper {
+  width: 30%;
+  margin: 60px auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.bookAddTitle {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 40px;
+  color: #333;
+}
+
+.bookAddForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.bookAddField {
+  display: flex;
+  flex-direction: column;
+}
+
+.bookAddField label {
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #444;
+}
+
+.bookAddField input[type="text"],
+.bookAddField select,
+.bookAddField input[type="file"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+
+
+

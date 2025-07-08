@@ -73,8 +73,8 @@ CREATE TABLE book (
     briter VARCHAR(50) NOT NULL,             
     bpub VARCHAR(50) NOT NULL,               
     bimg VARCHAR(100),                        
-    sno INT unsigned NOT NULL,                         
-    cno INT unsigned,
+    sno INT unsigned,                         
+    cno INT unsigned NOT NULL,
     constraint primary key (bno),
     constraint foreign key(sno) references slot(sno) on update cascade on delete cascade,
     constraint foreign key(cno) references category(cno) on update cascade on delete cascade
@@ -191,3 +191,5 @@ select * from book ;
 select * from inven where bno = 2;
 select * from inven where istock < 0;
 select * from loan;
+
+select * from user;

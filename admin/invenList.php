@@ -45,6 +45,9 @@ $result = $stmt->get_result();
     <h2 class="invenTitle">도서 입출고 내역</h2>
     <!-- 버튼 -->
     <div class="invenButtonWrapper">
+        <form action="bookListAll.php" method="get">
+            <button type="submit" class="invenButton newBookButton">도서 전체 목록</button>
+        </form>
         <form action="inven.php" method="get">
             <input type="hidden" name="itype" value="0"> 
             <button type="submit" class="invenButton inButton">입고</button>

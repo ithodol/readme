@@ -10,7 +10,7 @@
     <form action="userList.php" method="get">
         <button type="submit" class="adminBtn">회원 관리</button>
     </form>
-    <form action="invenList.php" method="get">
+    <form action="bookListAll.php" method="get">
         <button type="submit" class="adminBtn">도서 관리</button>
     </form>
   </div>
