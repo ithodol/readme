@@ -29,7 +29,10 @@ if (session_status() === PHP_SESSION_NONE) {
                       <a href='/readme/user/logout.php'>로그아웃 </a>
                       <a href='/readme/user/info.php'>마이페이지</a>";
             } else {
-                echo "<a href='/readme/user/login.php'>로그인</a>";
+                echo "
+                    <a href='/readme/user/join.php'>회원가입</a>
+                    <a href='/readme/user/login.php'>로그인</a>
+                ";
             }
             ?>
             </div>
