@@ -27,7 +27,7 @@ if ($row_img && $row_img['bimg']) {
     }
 }
 
-// 도서 삭제
+
 $sql_delete = "DELETE FROM book WHERE bno = ?";
 $stmt_del = $conn->prepare($sql_delete);
 $stmt_del->bind_param("i", $bno);

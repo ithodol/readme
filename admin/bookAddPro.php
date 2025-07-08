@@ -8,13 +8,12 @@ $bpub = $_POST['bpub'];
 $sno = $_POST['sno'];
 $cno = $_POST['cno'];
 
-// 필수값 체크
 if (!$btitle || !$briter || !$bpub || !$sno || !$cno) {
     echo "<script>alert('모든 필수 항목을 입력해주세요.'); history.back();</script>";
     exit;
 }
 
-// 이미지 업로드 처리
+// 이미지 업로드
 $bimg = 'default.png';  // 기본값
 
 if (isset($_FILES['bimg']) && $_FILES['bimg']['error'] === 0) {
@@ -27,7 +26,7 @@ if (isset($_FILES['bimg']) && $_FILES['bimg']['error'] === 0) {
     }
 }
 
-// 도서 등록 쿼리
+// 도서 등록
 $sql = "INSERT INTO book (btitle, briter, bpub, bimg, sno, cno)
         VALUES ('$btitle', '$briter', '$bpub', '$bimg', '$sno', '$cno')";
 
