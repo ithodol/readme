@@ -2,7 +2,6 @@
 session_start();
 include '../db.php';
 
-// 관리자 체크
 if (!isset($_SESSION['adno'])) {
     echo "<script>alert('관리자만 접근 가능합니다.'); location.href='../home.php';</script>";
     exit;
