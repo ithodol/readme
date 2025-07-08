@@ -8,7 +8,7 @@ if (!isset($_SESSION['uno'])) {
 }
 
 echo "<script>
-    if (confirm('정말 탈퇴하시겠습니까? 탈퇴 후에는 복구가 불가능합니다.')) {
+    if (confirm('정말 탈퇴하시겠습니까?')) {
         window.location.href = 'deleteCon.php'; 
     } else {
         history.back();

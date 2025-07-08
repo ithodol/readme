@@ -19,7 +19,7 @@ $user = $result->fetch_assoc();
 <?php include '../header.php'; ?>
 
 <div class="userEditCon">
-  <h2 class="editTitle">👤 회원 정보 수정</h2>
+  <h2 class="editTitle">회원 정보 수정</h2>
   <form class="userEditForm" action="updatePro.php" method="post">
       <input type="hidden" name="uno" value="<?= $uno ?>">
 

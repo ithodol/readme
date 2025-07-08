@@ -14,7 +14,7 @@ if (!$btitle || !$briter || !$bpub || !$sno || !$cno) {
 }
 
 // 이미지 업로드
-$bimg = 'default.png';  // 기본값
+$bimg = 'default.png';
 
 if (isset($_FILES['bimg']) && $_FILES['bimg']['error'] === 0) {
     $uploadDir = '../upload/book';

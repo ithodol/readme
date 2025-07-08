@@ -2,13 +2,11 @@
 session_start();
 include '../db.php';
 
-// 로그인한 회원만 접근 가능
 if (!isset($_SESSION['uno'])) {
     echo "<script>alert('회원만 접근 가능합니다. 로그인 후 이용해주세요.'); location.href='../home.php';</script>";
     exit;
 }
 
-// 사용자 정보 조회
 $uno = $_SESSION['uno'];
 $sql_user = "SELECT uid, uname, uphone FROM user WHERE uno = ?";
 $stmt_user = $conn->prepare($sql_user);

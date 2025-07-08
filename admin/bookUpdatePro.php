@@ -32,7 +32,7 @@ if (isset($_FILES['bimg']) && $_FILES['bimg']['error'] === UPLOAD_ERR_OK) {
 
     // 이미지 업데이트
     $sql = "UPDATE book SET btitle='$btitle', briter='$briter', bpub='$bpub', sno=$sno, cno=$cno, bimg='$imgName' WHERE bno=$bno";
-} else { // 이미지 없으면
+} else {
     $sql = "UPDATE book SET btitle='$btitle', briter='$briter', bpub='$bpub', sno=$sno, cno=$cno WHERE bno=$bno";
 }
 

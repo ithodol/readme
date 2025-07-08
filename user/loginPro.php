@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $uid = $conn->real_escape_string($_POST['uid']);
     $upwd = $conn->real_escape_string($_POST['upwd']);
 
-    // 탈퇴 회원 로그인 제한
+    // 탈퇴 회원 로그인 x
     $sql = "SELECT uno, uid, uname FROM user WHERE uid = '$uid' AND upwd = '$upwd' AND (udelete IS NULL OR udelete = 0)";
     $result = $conn->query($sql);
 
