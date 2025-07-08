@@ -52,7 +52,7 @@ $result = mysqli_query($conn, $sql);
         if ($result && mysqli_num_rows($result) > 0) {
             $no = 1;
             while ($row = mysqli_fetch_assoc($result)) {
-                $imgSrc = $row['bimg'] ? "../img/" . htmlspecialchars($row['bimg']) : "../img/default.png";
+                $imgSrc = $row['bimg'] ? "../upload/book/" . htmlspecialchars($row['bimg']) : "../upload/book/default.png";
                 $location = htmlspecialchars($row['srow'] . '-' . $row['scol']);
                 $category = $row['cname'] ? htmlspecialchars($row['cname']) : '-';
                 $stock = (int)$row['stock'];

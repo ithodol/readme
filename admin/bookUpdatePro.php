@@ -24,7 +24,7 @@ if (isset($_FILES['bimg']) && $_FILES['bimg']['error'] === UPLOAD_ERR_OK) {
 
     if (in_array($imgExt, $allowedExt)) {
         $imgName = uniqid('book_') . '.' . $imgExt;
-        move_uploaded_file($tmpName, "../img/" . $imgName);
+        move_uploaded_file($tmpName, "../upload/book/" . $imgName);
     } else {
         echo "<script>alert('지원하지 않는 이미지 형식입니다.'); history.back();</script>";
         exit;

@@ -62,7 +62,7 @@ if ($resultBooks->num_rows > 0) {
 
         echo '<div class="bookItem">';
         echo '<a href="bookView.php?bno=' . $bno . '">';
-        echo '<img src="../img/' . htmlspecialchars($book['bimg']) . '" alt="' . htmlspecialchars($book['btitle']) . '">';
+        echo '<img src="../upload/book/' . htmlspecialchars($book['bimg']) . '" alt="' . htmlspecialchars($book['btitle']) . '">';
         echo '<h4>' . htmlspecialchars($book['btitle']) . '</h4>';
         echo '</a>';
         echo '<p>' . htmlspecialchars($book['briter']) . '</p>';
