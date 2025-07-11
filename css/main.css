@@ -24,15 +24,63 @@ body {
 .bookBox > h1{
     margin:60px 0px;
 }
-.bookBox, .searchBox{
+.bookBox{
     text-align: center;
 }
+
+/* 검색 */
+.searchBox {
+  margin-bottom: 40px;
+  text-align: center;
+}
 .searchBox > h1{
-    margin-top: 50px;
+    margin: 70px 0px 40px 0px;
 }
-.searchBox > form {
-    margin: 20px 0px 50px 0px;
+
+.searchForm {
+  display: inline-block;
 }
+
+.searchInput {
+  padding: 8px 12px;
+  width: 250px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  vertical-align: middle;
+}
+
+.searchButton, .resetButton {
+  padding: 8px 16px;
+  font-size: 1rem;
+  margin-left: 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.searchButton {
+  background-color: black;
+  color: white;
+}
+
+.searchButton:hover {
+  background-color: gray;
+}
+
+.resetButton {
+  background-color: #6c757d;
+  color: white;
+}
+
+.resetButton:hover {
+  background-color: #565e64;
+}
+
+
+
+/* 도서 내역 */
 
 .bookList {
     display: grid;

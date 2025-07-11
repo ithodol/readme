@@ -2,30 +2,64 @@
 session_start();
 include '../db.php';
 
-
 $cno = isset($_GET['cno']) ? intval($_GET['cno']) : 0;
+$keyword = isset($_GET['keyword']) ? trim($_GET['keyword']) : '';
 
-// 도서 목록
+// 1. 기본 SQL
 $sql = "SELECT bno, btitle, briter, bpub, bimg, cno FROM book";
-if ($cno > 0) {
+
+// 2. 조건 조립 (카테고리, 검색어)
+if ($cno > 0 && $keyword !== "") {
+    // 카테고리 + 검색어 둘 다 있는 경우
+    $sql .= " WHERE cno = $cno AND (btitle LIKE '%$keyword%' OR briter LIKE '%$keyword%')";
+} else if ($cno > 0) {
+    // 카테고리만 있는 경우
     $sql .= " WHERE cno = $cno";
+} else if ($keyword !== "") {
+    // 검색어만 있는 경우
+    $sql .= " WHERE btitle LIKE '%$keyword%' OR briter LIKE '%$keyword%'";
 }
+
 $sql .= " ORDER BY bno ASC";
+
+// 3. 도서 조회
 $resultBooks = $conn->query($sql);
 ?>
 
 <?php include '../header.php'; ?>
 
-<h1 style="text-align: center; margin:60px 0px;">📚 도서 전체 목록</h1>
+<h1 style="text-align: center; margin:70px 0px 40px 0px;">
+<?php
+if ($keyword !== "") {
+    echo "🔍 '" . htmlspecialchars($keyword) . "' 검색 결과";
+} else {
+    echo "📚 도서 전체 목록";
+}
+?>
+</h1>
+
+<div class="searchBox">
+    <form method="get" action="bookList.php" class="searchForm">
+    <input type="text" name="keyword" placeholder="도서명 또는 저자 검색" value="<?= htmlspecialchars($keyword) ?>" class="searchInput">
+    <?php if ($cno > 0): ?>
+        <input type="hidden" name="cno" value="<?= $cno ?>">
+    <?php endif; ?>
+    <button type="submit" class="searchButton">검색</button>
+    <button type="button" onclick="location.href='bookList.php'" class="resetButton">검색 초기화</button>
+    </form>
+</div>
+
 
 <!-- 카테고리 버튼 -->
 <div class="categoryButtons">
-    <a href="bookList.php" <?= $cno == 0 ? 'class="active"' : '' ?>>전체</a>
+    <a href="bookList.php<?= $keyword ? '?keyword=' . urlencode($keyword) : '' ?>" <?= $cno == 0 ? 'class="active"' : '' ?>>전체</a>
     <?php
     $resultCats = $conn->query("SELECT cno, cname FROM category ORDER BY cno ASC");
     while ($cat = $resultCats->fetch_assoc()) {
         $active = ($cat['cno'] == $cno) ? 'class="active"' : '';
-        echo '<a href="?cno=' . $cat['cno'] . '" ' . $active . '>' . htmlspecialchars($cat['cname']) . '</a> ';
+        $href = "?cno={$cat['cno']}";
+        if ($keyword !== "") $href .= "&keyword=" . urlencode($keyword);
+        echo "<a href='$href' $active>" . htmlspecialchars($cat['cname']) . "</a> ";
     }
     ?>
 </div>
@@ -77,7 +111,7 @@ if ($resultBooks->num_rows > 0) {
         echo '</div>';
     }
 } else {
-    echo '<p style="text-align:center; margin-top:40px;">등록된 도서가 없습니다.</p>';
+    echo '<p style="text-align:center; margin-top:40px;">검색 결과가 없습니다.</p>';
 }
 ?>
 </div>

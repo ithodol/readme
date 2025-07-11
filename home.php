@@ -5,19 +5,19 @@ include 'db.php';
 
 <?php include 'header.php'; ?>
 
-<!-- 🔍 검색 기능 -->
-<!-- <div class="searchBox">
-    <h1>🔍 도서 검색</h1>
-    <form method="get" action="search.php">
-        <input type="text" name="keyword" placeholder="도서명 또는 저자 검색" required>
-        <button type="submit">검색</button>
-    </form>
-</div> -->
 
+<div class="searchBox">
+    <h1>🔍 도서 검색</h1>
+    <form method="get" action="/readme/book/bookList.php" class="searchForm">
+        <input type="text" name="keyword" placeholder="도서명 또는 저자 검색" class="searchInput" required>
+        <button type="submit" class="searchButton">검색</button>
+    </form>
+</div>
+
+<hr class="homeHr">
 
 <!-- 📖 대출 가능 도서 -->
 <?php
-// book 표 전체 조회해서 도서별 조건 해결
 $sqlAllBooks = "SELECT bno, btitle, briter, bimg FROM book ORDER BY bno DESC";
 $resultAll = $conn->query($sqlAllBooks);
 

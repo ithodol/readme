@@ -58,7 +58,7 @@ $canLoan = $currentStock > 0 && !$isLoaned;
     <h1 class="pageTitle">📘 도서 정보</h1>
     <div class="bookDetailContainer">
         <div class="bookImageContainer">
-            <img class="bookImage" src="../img/<?= htmlspecialchars($book['bimg']) ?>" alt="<?= htmlspecialchars($book['btitle']) ?>">
+            <img class="bookImage" src="../upload/book/<?= htmlspecialchars($book['bimg']) ?>" alt="<?= htmlspecialchars($book['btitle']) ?>">
         </div>
         <div class="bookInfo">
             <h2 class="bookTitle"><?= htmlspecialchars($book['btitle']) ?></h2>
