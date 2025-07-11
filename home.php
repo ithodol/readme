@@ -67,7 +67,7 @@ if ($resultAll->num_rows > 0) {
             <?php foreach ($availableBooks as $book): ?>
             <div class="bookItem">
                 <a href="./book/bookView.php?bno=<?= htmlspecialchars($book['bno']) ?>">
-                    <img src="img/<?= htmlspecialchars($book['bimg']) ?>" alt="<?= htmlspecialchars($book['btitle']) ?>" />
+                    <img src="/readme/upload/book/<?= htmlspecialchars($book['bimg']) ?>" alt="<?= htmlspecialchars($book['btitle']) ?>" />
                 </a>
                 <div class="bookTitle"><?= htmlspecialchars($book['btitle']) ?></div>
                 <div class="bookAuthor"><?= htmlspecialchars($book['briter']) ?></div>
